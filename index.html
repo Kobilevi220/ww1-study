@@ -156,7 +156,26 @@ ul.clean li{margin:3px 0}
 .vid .t{font-weight:700;font-size:15px;line-height:1.3}
 .vid .m{font-size:13px;color:var(--muted);margin-top:3px}
 .vid .m .lang{color:var(--good);font-weight:700}
-.vid .m .lang.en{color:var(--elec)}
+.vwrap{display:grid;gap:6px;align-content:start}
+.vq{font-size:14px;color:var(--muted)}
+.vq .ok{color:var(--good);font-weight:700}
+.vq .q{padding:10px;margin-top:4px}
+.vq .q .qt{font-size:15px}
+.vq .opt{font-size:14px;padding:6px 10px}
+/* retry pool (round 2) */
+.pool.retry{border-color:var(--bad);background:var(--heat-soft)}
+.rlabel{font-size:13px;color:var(--bad);font-weight:700;align-self:center}
+.chip.wait{opacity:.65}
+/* europe map game */
+.mapwrap svg{width:100%;height:auto;display:block;background:var(--kin-soft);border-radius:8px;border:1px solid var(--rule)}
+.cty{fill:var(--panel);stroke:var(--muted);stroke-width:1.5;cursor:pointer;transition:fill .15s}
+.cty:hover{stroke:var(--ink);stroke-width:2.5}
+.cty.c{fill:var(--heat)} .cty.e{fill:var(--kin)} .cty.n{fill:var(--muted)}
+.cty.hit{fill:var(--chem)} .cty.miss{fill:var(--heat)}
+.cty.lock{pointer-events:none}
+.clabel{font-size:12px;font-family:var(--display);font-weight:700;fill:var(--ink);pointer-events:none;text-anchor:middle;paint-order:stroke;stroke:var(--panel);stroke-width:3px;stroke-linejoin:round}
+.legend .sw{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:middle;margin-left:4px}
+.sw.c{background:var(--heat)} .sw.e{background:var(--kin)} .sw.n{background:var(--muted)}
 /* accordion */
 details{border:1px solid var(--rule);border-radius:8px;background:var(--panel);padding:8px 14px}
 details+details{margin-top:8px}
@@ -268,7 +287,7 @@ footer{padding-block:30px;color:var(--muted);font-size:14px;border-top:1px solid
   <div class="howto">
     <div><b>1. קראו</b> את ההסבר וההגדרה הצבועה.</div>
     <div><b>2. שחקו</b> במיון או בהדגמה. זה מה שנשאר בראש.</div>
-    <div><b>3. צפו</b> בסרטון אחד לפחות (1–12 דקות).</div>
+    <div><b>3. צפו</b> בסרטון אחד לפחות וענו על 2 שאלות עליו. זה מה שפותח את הבוס.</div>
     <div><b>4. נצחו את הבוס</b> ואז הסבירו להורה.</div>
   </div>
   <div class="rules"><span>✅ תשובה נכונה: +10</span><span>👑 בוס: +5 לשאלה, +20 על 3/3</span><span>🔥 רצף של 5: בונוס</span><span>🏅 תג: +25</span><span>❌ טעות לא מורידה נקודות</span></div>
@@ -338,7 +357,7 @@ footer{padding-block:30px;color:var(--muted);font-size:14px;border-top:1px solid
       <ul class="clean" style="margin-top:8px">
         <li>האימפריה העות׳מאנית נחלשת ומתפוררת, ועמי הבלקן (סרבים, בולגרים, יוונים ועוד) נאבקים ל<b>עצמאות</b>.</li>
         <li>שתי קיסרויות שכנות, <b>רוסיה</b> ו<b>אוסטרו-הונגריה</b>, רוצות להשתלט על האזור במקום העות׳מאנים.</li>
-        <li><b>1908:</b> אוסטרו-הונגריה מספחת את <b>בוסניה והרצגובינה</b>. <b>סרביה</b>, שרצתה את בוסניה (גם בגלל הגישה לים), זועמת ומאיימת במלחמה. רוסיה תומכת בסרביה.</li>
+        <li><b>1908:</b> אוסטרו-הונגריה מספחת את <b>בוסניה והרצגובינה</b>. <b>סרביה</b>, שרצתה את בוסניה (גם בגלל הגישה לים), זועמת ומאיימת במלחמה. רוסיה תומכת בסרביה ודורשת מאוסטרו-הונגריה לסגת מהאזור. הפעם זה נגמר בלי מלחמה, אבל האווירה כבר מלחמתית.</li>
         <li><b>1912–1913: מלחמות הבלקן.</b> בולגריה, סרביה, מונטנגרו ויוון נגד העות׳מאנים, והאימפריה מאבדת כמעט את כל שטחיה בבלקן.</li>
       </ul>
     </div>
@@ -438,12 +457,24 @@ footer{padding-block:30px;color:var(--muted);font-size:14px;border-top:1px solid
   <div class="lockcard"><div class="big">🔒</div><h3>תחנה נעולה</h3><p>נצחו את הבוס של תחנה 3 כדי לפתוח.</p><button class="btn ghost" data-unlock>פתחו בכל זאת</button></div>
   <div class="st-body">
   <p class="lead">ארבעת הגורמים הם "חבית אבק השרפה". הניצוץ הגיע ב-<b>28 ביוני 1914</b>, בעיר <b>סרייבו</b> שבבוסניה. שימו לב להבדל שבמבחן אוהבים לשאול: הגורמים הם <b>גורמי עומק</b> שנבנו במשך עשרות שנים. הרצח הוא <b>הגורם המיידי</b>, העילה.</p>
-  <div class="def"><b>רצח פוליטי מצית מלחמה:</b> ב-28 ביוני 1914 רצח <b>גברילו פרינציפ</b>, סרבי בוסני לאומן, את <b>פרנץ פרדיננד</b>, יורש העצר האוסטרו-הונגרי, ואת אשתו, בביקור בסרייבו. אוסטרו-הונגריה האשימה את סרביה והציבה לה <b>אולטימטום</b> (לפרק ארגונים לאומיים, להפסיק הסתה, לאפשר לחוקרים אוסטרים לחקור). סרביה קיבלה את רוב הדרישות, ובכל זאת ב-<b>28 ביולי 1914</b> הכריזה אוסטרו-הונגריה מלחמה על סרביה. <b>מערכת הבריתות</b> החלה לפעול, ותוך חודש כל מעצמות אירופה היו במלחמה.</div>
+  <div class="def"><b>רצח פוליטי מצית מלחמה:</b> ב-28 ביוני 1914 רצח <b>גברילו פרינציפ</b>, סרבי בוסני לאומן, את <b>פרנץ פרדיננד</b>, יורש העצר האוסטרו-הונגרי, ואת אשתו, בביקור בסרייבו. אוסטרו-הונגריה האשימה את סרביה והציבה לה <b>אולטימטום</b> (לפרק את הארגונים הלאומיים שפעלו שם, להטיל פיקוח על העיתונות, ולאפשר לנציגי אוסטריה לחקור את הרצח). סרביה קיבלה את רוב הדרישות, ובכל זאת ב-<b>28 ביולי 1914</b> הכריזה אוסטרו-הונגריה מלחמה על סרביה. <b>מערכת הבריתות</b> החלה לפעול, ותוך חודש כל מעצמות אירופה היו במלחמה.</div>
   <div class="sp"></div>
   <div class="card">
     <h3>תרגול: סדרו את שרשרת האירועים</h3>
     <p style="margin-top:6px">לחצו על האירועים לפי הסדר הנכון. זו בדיוק התשובה לשאלה "הסבירו כיצד רצח אחד הפך למלחמת עולם".</p>
     <div id="builder" style="margin-top:10px"></div>
+  </div>
+  <div class="sp"></div>
+  <div class="card">
+    <h3>משחק מפה: אירופה 1914</h3>
+    <p style="margin-top:4px;font-size:15px;color:var(--muted)">המפה סכמטית (לא מדויקת), כמו המפה בעמ׳ 53 בספר. שני משחקים: קודם מוצאים את המדינות, ואז צובעים כל מדינה לפי הגוש שלה במלחמה.</p>
+    <div class="srcbtns" id="mapmodes" style="margin-top:8px"></div>
+    <p class="feedback" id="map-task"></p>
+    <div class="mapwrap"><svg id="eumap" viewBox="0 0 860 520" role="img" aria-label="מפת אירופה 1914"></svg></div>
+    <div class="legend"><span><i class="sw c"></i> מדינות המרכז</span><span><i class="sw e"></i> מדינות ההסכמה</span><span><i class="sw n"></i> ניטרליות</span></div>
+    <div class="ctrls" id="map-ctrls"></div>
+    <div class="feedback" id="map-fb"></div>
+    <div class="statline"><span>"איפה זה?": <b id="map-find">0</b>/14</span><span>צביעת המפה: <b id="map-paint">לא הושלם</b></span><span style="color:var(--muted)">שניהם = תג 🗺️</span></div>
   </div>
   <div class="sp"></div>
   <div class="two">
@@ -538,7 +569,7 @@ footer{padding-block:30px;color:var(--muted);font-size:14px;border-top:1px solid
     <ul class="clean" style="margin-top:8px">
       <li>יהודים חיו גם במדינות ההסכמה וגם במדינות המרכז. כאזרחים נאמנים התגייסו לצבאות מדינותיהם, ולכן <b>יהודים נלחמו ביהודים</b>.</li>
       <li>למרות הנאמנות, הוטלו עליהם <b>האשמות</b>: רוסיה גירשה מאות אלפי יהודים מאזורי הלחימה בטענה שהם מרגלים; בגרמניה האשימו אותם בהשתמטות ובספסרות; בבריטניה ובארה״ב דרשו מהם להצהיר נאמנות.</li>
-      <li><b>הגדודים העבריים:</b> יוזמה של <b>יוסף טרומפלדור</b> ו<b>זאב ז׳בוטינסקי</b>. ב-1915 הוקם <b>גדוד נהגי הפרדות</b> שלחם ב<b>גליפולי</b> (אספקה ותחמושת). אחר כך <b>גדודי הקלעים המלכותיים 38, 39 ו-40</b> (ה-40: "הגדוד הארץ-ישראלי"). כ-4,000 מתנדבים.</li>
+      <li><b>הגדודים העבריים:</b> יוזמה של <b>יוסף טרומפלדור</b> ו<b>זאב ז׳בוטינסקי</b>. ב-1915 הוקם <b>גדוד נהגי הפרדות</b> שלחם ב<b>גליפולי</b> (אספקה ותחמושת). אחר כך <b>גדודי הקלעים המלכותיים 38, 39 ו-40</b> (ה-38 מבריטניה, ה-39 מארה״ב, ה-40 ממתנדבי ארץ ישראל, "הגדוד הארץ-ישראלי"). כ-4,000 מתנדבים. הלוחמים בגדודים 39 ו-40 לא הספיקו להשתתף בלחימה.</li>
       <li><b>המטרה:</b> שהיהודים ייחשבו צד לוחם ויקבלו זכות להשתתף בדיונים על עתיד ארץ ישראל אחרי המלחמה.</li>
     </ul>
   </div>
@@ -652,7 +683,7 @@ footer{padding-block:30px;color:var(--muted);font-size:14px;border-top:1px solid
 </section>
 
 <footer>
-  <p>הסרטונים נפתחים ביוטיוב בחלון חדש. סרטונים בעברית מסומנים ב-<b style="color:var(--good)">עברית</b>; שלושה סרטוני אנימציה (OverSimplified, History Matters, HISTORY) הם באנגלית, קצרים ומצחיקים, ומובנים גם עם כתוביות אוטומטיות.</p>
+  <p>כל הסרטונים בעברית ונפתחים ביוטיוב בחלון חדש. אחרי חצי מאורך הסרטון נפתחות 2 שאלות עליו; תשובה נכונה על סרטון אחד לפחות פותחת את הבוס של התחנה.</p>
   <p style="margin-top:6px">הנקודות, התגים וההתקדמות נשמרים רק בדפדפן הזה. "הדוח שלי" למעלה מסכם הכול להורה. החומר לפי הספר, עמ׳ 46–62: אם במחברת כתוב אחרת, לכו לפי המחברת.</p>
 </footer>
 </main>
@@ -675,7 +706,7 @@ const STATIONS=['blocs','national','arms','spark','fronts','usa','total'];
 const STNAMES={blocs:'שני גושים',national:'מאבקים לאומיים',arms:'אימפריאליזם וחימוש',spark:'סרייבו 1914',fronts:'החזיתות',usa:'ארה״ב ויהודים',total:'מלחמה טוטלית',timeline:'ציר זמן ומושגים'};
 
 /* ═══════ game state ═══════ */
-const G={pts:store.get('pts',0),streak:0,best:store.get('beststreak',0),badges:store.get('badges',{}),boss:store.get('boss',{}),tries:store.get('tries',{}),unlocked:store.get('unlocked',{blocs:true}),seen:store.get('seen',{}),demos:store.get('demos',{}),explained:store.get('explained',{}),sprint:store.get('sprint',{best:0,runs:0}),smart:store.get('smart',{done:0}),quizAwarded:store.get('quizAwarded',{}),wrongTopics:store.get('wrongTopics',{}),built:store.get('built',{}),tl:store.get('tl',{ok:0,run:0})};
+const G={pts:store.get('pts',0),streak:0,best:store.get('beststreak',0),badges:store.get('badges',{}),boss:store.get('boss',{}),tries:store.get('tries',{}),unlocked:store.get('unlocked',{blocs:true}),seen:store.get('seen',{}),vopen:store.get('vopen',{}),demos:store.get('demos',{}),explained:store.get('explained',{}),sprint:store.get('sprint',{best:0,runs:0}),smart:store.get('smart',{done:0}),quizAwarded:store.get('quizAwarded',{}),wrongTopics:store.get('wrongTopics',{}),built:store.get('built',{}),tl:store.get('tl',{ok:0,run:0})};
 const LEVELS=[[0,'טירון'],[120,'חייל חפירות'],[300,'טייס סיור'],[520,'מפקד טנק'],[800,'אלוף ההיסטוריה']];
 function levelOf(p){let i=0;for(let k=0;k<LEVELS.length;k++)if(p>=LEVELS[k][0])i=k;return i}
 function renderXP(){const i=levelOf(G.pts),next=LEVELS[i+1];$('#lvl').textContent=LEVELS[i][1];$('#pts').innerHTML=G.pts+' נק׳'+(next?'<span class="nxt"> · עוד '+(next[0]-G.pts)+' ל"'+next[1]+'"</span>':'');$('#xpbar').style.width=(next?((G.pts-LEVELS[i][0])/(next[0]-LEVELS[i][0])*100):100)+'%';$('#streak').textContent='🔥 רצף: '+G.streak+(G.best?' (שיא '+G.best+')':'');$('#streak').classList.toggle('hot',G.streak>=3)}
@@ -689,7 +720,7 @@ function wrong(){G.streak=0;renderXP()}
 const BADGES=[
  {k:'st_blocs',i:'🤝',n:'שני גושים',d:'ניצחתם את בוס 1'},{k:'st_national',i:'🏴',n:'לאומיות',d:'ניצחתם את בוס 2'},{k:'st_arms',i:'⚓',n:'מרוץ חימוש',d:'ניצחתם את בוס 3'},{k:'st_spark',i:'💥',n:'סרייבו',d:'ניצחתם את בוס 4'},{k:'st_fronts',i:'🪖',n:'החזיתות',d:'ניצחתם את בוס 5'},{k:'st_usa',i:'🗽',n:'ארה״ב',d:'ניצחתם את בוס 6'},{k:'st_total',i:'🏭',n:'מלחמה טוטלית',d:'ניצחתם את בוס 7'},
  {k:'perfect',i:'💯',n:'ללא טעויות',d:'בוס 3/3 בניסיון ראשון'},{k:'allperfect',i:'👑',n:'שלמות',d:'כל 7 הבוסים 3/3'},{k:'full',i:'🎖️',n:'כל החזיתות',d:'כל 7 התחנות'},
- {k:'watcher',i:'📺',n:'צופה',d:'פתחתם 3 סרטונים'},{k:'scientist',i:'🧭',n:'חוקר',d:'הפעלתם את 3 ההדגמות'},{k:'chain',i:'⛓️',n:'שרשרת',d:'סידרתם את 3 שרשראות האירועים'},
+ {k:'watcher',i:'📺',n:'צופה',d:'3 סרטונים + שאלות נכונות'},{k:'scientist',i:'🧭',n:'חוקר',d:'הפעלתם את 3 ההדגמות'},{k:'chain',i:'⛓️',n:'שרשרת',d:'סידרתם את 3 שרשראות האירועים'},{k:'map',i:'🗺️',n:'קרטוגרף',d:'שני משחקי המפה הושלמו'},
  {k:'streak5',i:'🔥',n:'5 ברצף',d:'5 תשובות נכונות ברצף'},{k:'streak10',i:'☄️',n:'10 ברצף',d:'10 תשובות נכונות ברצף'},
  {k:'sprinter',i:'⏱️',n:'ספרינטר',d:'10+ בספרינט של דקה'},{k:'brain',i:'🧠',n:'זיכרון ברזל',d:'סיבוב חזרה חכמה שלם'},
  {k:'teacher',i:'🗣️',n:'המורה הקטן',d:'הסברתם להורה 4 פעמים'},{k:'dates',i:'🗓️',n:'מאסטר תאריכים',d:'10 שאלות ציר זמן נכונות'},{k:'dates25',i:'🎓',n:'היסטוריון',d:'25 שאלות ציר זמן נכונות'},{k:'champ',i:'🏆',n:'אלוף המבחן',d:'13+ מתוך 15 במבחן'}
@@ -744,26 +775,74 @@ grid($('#weapons-grid'),[
  {ico:'☠️',n:'חומרי לחימה כימיים',g:'w',d:'גז רעיל, בשימוש הגרמנים לראשונה. החיילים חבשו מסכות גז. נשק להרג המוני.',ex:'בתמונה בספר: חיילים גרמנים במסכות גז ליד תותח נגד מטוסים.'}
 ]);
 
-/* ═══════ videos ═══════ */
+/* ═══════ videos (Hebrew only) + per-video quiz that unlocks the boss ═══════ */
 const VIDS={
- blocs:[{id:'adHb9a5gvGc',t:'כיתה ט׳, יחידה 2 פרק ג: רוחות מלחמה והגורמים למלחמה (לפי הספר!)',ch:'לומדים בקלות',len:'11:49',he:true},{id:'O5jBayyX2_M',t:'הגורמים לפתיחת מלחמת העולם הראשונה',ch:'יוני גרין',len:'5:00',he:true},{id:'dHSQAEam2yc',t:'WW1 Oversimplified (חלק 1): מצחיק ומדויק',ch:'OverSimplified',len:'6:24',he:false}],
- national:[{id:'e5MRrykYqdQ',t:'מלחמת העולם הראשונה בקיצור',ch:'הדרך הקלה',len:'10:25',he:true},{id:'P6rEH1F9b2U',t:'הסיבות והמאפיינים של המלחמה',ch:'היסטוריה בקצב שלך',len:'22:18',he:true}],
- arms:[{id:'pa-4jaRTB4I',t:'מלחמת העולם הראשונה',ch:'לומדים היסטוריה',len:'10:21',he:true},{id:'RKpKtbB57Ew',t:'מלחמת העולם הראשונה ב-3.5 דקות',ch:'mooriyale',len:'3:33',he:true}],
- spark:[{id:'0KT1zEvNQ6E',t:'כיתה ט׳, יחידה 2 פרק ג: חזיתות ומהלכים מרכזיים (לפי הספר!)',ch:'לומדים בקלות',len:'10:12',he:true},{id:'IIK9Lkf02TE',t:'How a Wrong Turn Started WW1: הפנייה הלא נכונה של הנהג בסרייבו',ch:'HISTORY',len:'3:24',he:false},{id:'M9EDK2X_fFw',t:'חדשות מהעבר: המלחמה הגדולה',ch:'כאן חינוכית',len:'14:05',he:true}],
- fronts:[{id:'r1L7b9_gDfQ',t:'לחימה בתעלות (עם תרגום)',ch:'Gilad Assodi',len:'3:15',he:true},{id:'XXSvHyDS8aw',t:'חדשות מהעבר: מלחמת העולם הראשונה במזרח התיכון',ch:'כאן חינוכית',len:'14:51',he:true},{id:'h_nsOzUDwuk',t:'הסכמי סייקס-פיקו',ch:'Michal Elmalem',len:'2:40',he:true},{id:'B6It6DHscpE',t:'הצהרת בלפור',ch:'WaterCookies',len:'1:03',he:true}],
- usa:[{id:'fhTFWe8dbEk',t:'Why did the US join WW1? אנימציה קצרה',ch:'History Matters',len:'3:37',he:false},{id:'HUFvyI9NyX0',t:'הגדודים העבריים',ch:'Yuval M',len:'3:41',he:true},{id:'yC-TSmYYin8',t:'הגדודים העבריים: התנדבות לצבא הבריטי',ch:'מורשת ההגנה',len:'11:01',he:true}],
- total:[{id:'q8KNUuzb9fY',t:'כיתה ט׳, יחידה 2 פרק ג: מלחמת העולם הראשונה כמלחמה טוטלית (לפי הספר!)',ch:'לומדים בקלות',len:'9:42',he:true},{id:'vxeJN_IG_tw',t:'מלחמה טוטאלית (דקה)',ch:'נעמה וינמן',len:'1:13',he:true},{id:'soBOMpbmHWI',t:'סיכום הפרק כולו: המלחמה הגדולה (לפי הספר!)',ch:'לומדים בקלות',len:'13:33',he:true},{id:'f9bUF8MI-SY',t:'חדשות מהעבר: מלחמת העולם הראשונה, הסוף',ch:'כאן חינוכית',len:'14:39',he:true}]
+ blocs:[
+  {id:'adHb9a5gvGc',t:'כיתה ט׳, יחידה 2 פרק ג: רוחות מלחמה והגורמים למלחמה (לפי הספר!)',ch:'לומדים בקלות',len:'11:49',qz:[{q:'מה קרה ב-1871 שערער את מאזן הכוחות באירופה?',o:['איחוד גרמניה','מהפכה ברוסיה','הרצח בסרייבו','הסכם סייקס-פיקו'],a:0},{q:'אילו מדינות היו בברית המשולשת?',o:['בריטניה, צרפת, רוסיה','גרמניה, אוסטרו-הונגריה, איטליה','גרמניה, רוסיה, סרביה','צרפת, איטליה, בלגיה'],a:1}]},
+  {id:'O5jBayyX2_M',t:'הגורמים לפתיחת מלחמת העולם הראשונה',ch:'יוני גרין',len:'5:00',qz:[{q:'איזה מהבאים הוא גורם לפרוץ המלחמה?',o:['מרוץ החימוש','הצהרת בלפור','הסכם ברסט-ליטובסק','כניסת ארה״ב'],a:0},{q:'מהו "הגורם המיידי" (הניצוץ) למלחמה?',o:['משבר מרוקו','רצח פרנץ פרדיננד בסרייבו','איחוד גרמניה','הטבעת הלוזיטניה'],a:1}]},
+  {id:'bVJfiycWLQ0',t:'מלחמת העולם הראשונה, שיעור 1: הגורמים',ch:'דודי זינגר',len:'12:38',qz:[{q:'מי היה הקנצלר של גרמניה המאוחדת?',o:['וילהלם השני','אוטו פון ביסמרק','פרנץ פרדיננד','וודרו וילסון'],a:1},{q:'איזו מדינה נקטה מדיניות של "בדידות מזהרת"?',o:['צרפת','רוסיה','בריטניה','איטליה'],a:2}]}],
+ national:[
+  {id:'e5MRrykYqdQ',t:'מלחמת העולם הראשונה בקיצור',ch:'הדרך הקלה',len:'10:25',qz:[{q:'באיזו שנה פרצה המלחמה?',o:['1908','1914','1917','1918'],a:1},{q:'כמה שנים נמשכה המלחמה?',o:['שנה','שנתיים','ארבע שנים (1914–1918)','עשר שנים'],a:2}]},
+  {id:'P6rEH1F9b2U',t:'הסיבות והמאפיינים של המלחמה',ch:'היסטוריה בקצב שלך',len:'22:18',qz:[{q:'אילו שתי קיסרויות התחרו על השליטה בבלקן?',o:['בריטניה וצרפת','רוסיה ואוסטרו-הונגריה','גרמניה ואיטליה','ספרד ופורטוגל'],a:1},{q:'איזה אזור כונה "חבית אבק השרפה של אירופה"?',o:['אלזס-לורן','מרוקו','הבלקן','סקנדינביה'],a:2}]}],
+ arms:[
+  {id:'pa-4jaRTB4I',t:'מלחמת העולם הראשונה',ch:'לומדים היסטוריה',len:'10:21',qz:[{q:'בין אילו מדינות התנהל מרוץ החימוש הימי?',o:['גרמניה ובריטניה','רוסיה ויפן','צרפת ואיטליה','ארה״ב וספרד'],a:0},{q:'משברי מרוקו (1905, 1911) הם דוגמה ל...',o:['מאבק לאומי בבלקן','תחרות אימפריאליסטית על שטחים','מלחמת צוללות','מהפכה'],a:1}]},
+  {id:'RKpKtbB57Ew',t:'מלחמת העולם הראשונה ב-3.5 דקות',ch:'mooriyale',len:'3:33',qz:[{q:'מי נרצח בסרייבו ב-1914?',o:['הקיסר וילהלם השני','פרנץ פרדיננד, יורש העצר האוסטרו-הונגרי','הצאר ניקולאי השני','ביסמרק'],a:1},{q:'מה אפיין את הלחימה בחזית המערבית?',o:['קרבות פרשים מהירים','מלחמת חפירות נייחת','לחימה בים בלבד','כניעה מיידית'],a:1}]}],
+ spark:[
+  {id:'0KT1zEvNQ6E',t:'כיתה ט׳, יחידה 2 פרק ג: חזיתות ומהלכים מרכזיים (לפי הספר!)',ch:'לומדים בקלות',len:'10:12',qz:[{q:'איפה נבלמו הגרמנים ב-1914?',o:['על נהר המרן, ליד פריז','בברלין','בסרייבו','במוסקבה'],a:0},{q:'מתי הצטרפה ארה״ב למלחמה?',o:['אוגוסט 1914','מאי 1915','אפריל 1917','נובמבר 1918'],a:2}]},
+  {id:'M9EDK2X_fFw',t:'חדשות מהעבר: המלחמה הגדולה',ch:'כאן חינוכית',len:'14:05',qz:[{q:'מי היו מדינות המרכז?',o:['בריטניה, צרפת, רוסיה','גרמניה, אוסטרו-הונגריה, העות׳מאנית, בולגריה','ארה״ב, איטליה, יוון','ספרד, שווייץ, הולנד'],a:1},{q:'למה ציפו החיילים שהתגייסו באוגוסט 1914?',o:['למלחמה קצרה, "נחזור לפני חג המולד"','לארבע שנים בחפירות','למהפכה','לשלום מיידי'],a:0}]},
+  {id:'O5jBayyX2_M',t:'הגורמים לפתיחת מלחמת העולם הראשונה',ch:'יוני גרין',len:'5:00',qz:[{q:'מה ההבדל בין "גורמי עומק" ל"גורם מיידי"?',o:['אין הבדל','גורמי עומק נבנו שנים; הגורם המיידי הוא הניצוץ (הרצח בסרייבו)','גורם מיידי הוא הבריתות','גורמי עומק קרו ב-1914 בלבד'],a:1},{q:'איך רצח אחד הפך למלחמה כללית?',o:['כי סרביה כבשה את וינה','בגלל מערכת הבריתות שגררה את כל המעצמות','כי ארה״ב דרשה זאת','בגלל הצהרת בלפור'],a:1}]}],
+ fronts:[
+  {id:'r1L7b9_gDfQ',t:'לחימה בתעלות (עם תרגום)',ch:'Gilad Assodi',len:'3:15',qz:[{q:'למה החיילים חפרו תעלות?',o:['כדי להתגונן מאש מקלעים ותותחים','כדי לגדל ירקות','כדי לעבור מתחת לאויב','כדי להתחמם'],a:0},{q:'איך קוראים למלחמה שבה החזית כמעט לא זזה?',o:['מלחמת בזק','מלחמה נייחת','מלחמת צוללות','מלחמת אזרחים'],a:1}]},
+  {id:'XXSvHyDS8aw',t:'חדשות מהעבר: מלחמת העולם הראשונה במזרח התיכון',ch:'כאן חינוכית',len:'14:51',qz:[{q:'נגד מי נלחמה בריטניה במזרח התיכון?',o:['האימפריה העות׳מאנית','צרפת','רוסיה','איטליה'],a:0},{q:'מה פורסם ב-2 בנובמבר 1917?',o:['הסכם סייקס-פיקו','הצהרת בלפור','הסכם ברסט-ליטובסק','האולטימטום לסרביה'],a:1}]},
+  {id:'h_nsOzUDwuk',t:'הסכמי סייקס-פיקו',ch:'Michal Elmalem',len:'2:40',qz:[{q:'בין אילו מדינות נחתם הסכם סייקס-פיקו?',o:['גרמניה ורוסיה','בריטניה וצרפת','ארה״ב ובריטניה','טורקיה ויוון'],a:1},{q:'מה חילק ההסכם?',o:['את גרמניה','את שטחי האימפריה העות׳מאנית במזרח התיכון','את הבלקן','את אפריקה'],a:1}]},
+  {id:'B6It6DHscpE',t:'הצהרת בלפור',ch:'WaterCookies',len:'1:03',qz:[{q:'מי היה בלפור?',o:['שר החוץ הבריטי','נשיא ארה״ב','הקיסר הגרמני','הצאר הרוסי'],a:0},{q:'מה הביעה ההצהרה?',o:['התנגדות לציונות','אהדה לשאיפות הציונים בארץ ישראל','הכרזת מלחמה על טורקיה','שלום עם גרמניה'],a:1}]}],
+ usa:[
+  {id:'C64WEHuVi_Q',t:'ארצות הברית במלחמת העולם הראשונה (מתורגם לעברית)',ch:'Gilad Assodi',len:'3:34',qz:[{q:'איזו אוניית נוסעים הוטבעה בידי צוללת גרמנית ב-1915?',o:['טיטאניק','לוזיטניה','ביסמרק','דרדנוט'],a:1},{q:'מתי הצטרפה ארה״ב למלחמה?',o:['1914','1915','אפריל 1917','1919'],a:2}]},
+  {id:'HUFvyI9NyX0',t:'הגדודים העבריים',ch:'Yuval M',len:'3:41',qz:[{q:'מי יזמו את הקמת הגדודים העבריים?',o:['הרצל ובן-גוריון','טרומפלדור וז׳בוטינסקי','בלפור וסייקס','וילסון ולויד ג׳ורג׳'],a:1},{q:'איפה לחם גדוד נהגי הפרדות ב-1915?',o:['בצרפת','בגליפולי','בירושלים','ברוסיה'],a:1}]},
+  {id:'yC-TSmYYin8',t:'הגדודים העבריים: התנדבות לצבא הבריטי',ch:'מורשת ההגנה',len:'11:01',qz:[{q:'לאיזה צבא התנדבו הגדודים העבריים?',o:['הגרמני','העות׳מאני','הבריטי','הרוסי'],a:2},{q:'מה הייתה המטרה הפוליטית של הגדודים?',o:['לכבוש את סיני לבד','שליהודים תהיה זכות להשתתף בדיונים על עתיד ארץ ישראל','להילחם ברוסיה','להקים צבא עצמאי'],a:1}]}],
+ total:[
+  {id:'q8KNUuzb9fY',t:'כיתה ט׳, יחידה 2 פרק ג: מלחמת העולם הראשונה כמלחמה טוטלית (לפי הספר!)',ch:'לומדים בקלות',len:'9:42',qz:[{q:'מהי מלחמה טוטלית?',o:['מלחמה בין שתי מדינות בלבד','מלחמה הקשורה לכל תחומי החיים, וההבדל בין חזית לעורף מיטשטש','מלחמה שנמשכת שנה','מלחמה בים'],a:1},{q:'מי החליפו את הגברים שגויסו בתעשייה ובחקלאות?',o:['ילדים','נשים','שבויים','חיילים זרים'],a:1}]},
+  {id:'vxeJN_IG_tw',t:'מלחמה טוטאלית (דקה)',ch:'נעמה וינמן',len:'1:13',qz:[{q:'במלחמה טוטלית, מה קורה להבדל בין חזית לעורף?',o:['הוא גדל','הוא מיטשטש','הוא לא משתנה','אין עורף'],a:1},{q:'מה מגייסת המדינה במלחמה טוטלית?',o:['רק את הצבא','את מרבית משאביה: כוח אדם, תעשייה, חקלאות','רק כסף','רק נשים'],a:1}]},
+  {id:'soBOMpbmHWI',t:'סיכום הפרק כולו: המלחמה הגדולה (לפי הספר!)',ch:'לומדים בקלות',len:'13:33',qz:[{q:'מתי נחתם הסכם ברסט-ליטובסק?',o:['28 ביוני 1914','7 במאי 1915','3 במרס 1918','11 בנובמבר 1918'],a:2},{q:'איזה כלי נשק נכנס לשימוש ב-1917 והיה מכריע בקרבות היבשה?',o:['הצוללת','הטנק','חיל הפרשים','החנית'],a:1}]},
+  {id:'f9bUF8MI-SY',t:'חדשות מהעבר: מלחמת העולם הראשונה, הסוף',ch:'כאן חינוכית',len:'14:39',qz:[{q:'מה גרם לרוסיה לפרוש מהמלחמה?',o:['ניצחון מוחץ','המהפכות של 1917 והסכם ברסט-ליטובסק','לחץ של בריטניה','הצהרת בלפור'],a:1},{q:'מי הצטרף ב-1917 לצד מדינות ההסכמה?',o:['ארצות הברית','האימפריה העות׳מאנית','בולגריה','ספרד'],a:0}]}]
 };
-$$('[data-vids]').forEach(el=>{(VIDS[el.dataset.vids]||[]).forEach(v=>{const a=document.createElement('a');a.className='vid'+(G.seen[v.id]?' seen':'');a.href='https://www.youtube.com/watch?v='+v.id;a.target='_blank';a.rel='noopener';a.innerHTML=`<div class="play">▶</div><div><div class="t">${v.t}</div><div class="m">${v.ch}${v.len?' · '+v.len:''} · <span class="lang${v.he?'':' en'}">${v.he?'עברית':'אנגלית'}</span></div></div>`;
-  a.addEventListener('click',()=>{if(!G.seen[v.id]){G.seen[v.id]=1;store.set('seen',G.seen);$$('.vid').forEach(x=>{if(x.href===a.href)x.classList.add('seen')});addPts(5,'פתחתם סרטון');if(Object.keys(G.seen).length>=3)award('watcher')}});el.appendChild(a)})});
+const lenSec=s=>{if(!s)return 120;const p=s.split(':').map(Number);return p.length===2?p[0]*60+p[1]:p[0]*3600+p[1]*60+p[2]};
+const fmtT=s=>Math.floor(s/60)+':'+String(s%60).padStart(2,'0');
+function stationVideoOK(k){return (VIDS[k]||[]).some(v=>G.seen[v.id])}
+function renderVideo(wrap,v){
+  const a=document.createElement('a');a.className='vid'+(G.seen[v.id]?' seen':'');a.href='https://www.youtube.com/watch?v='+v.id;a.target='_blank';a.rel='noopener';a.innerHTML=`<div class="play">▶</div><div><div class="t">${v.t}</div><div class="m">${v.ch}${v.len?' · '+v.len:''} · <span class="lang">עברית</span></div></div>`;
+  const q=document.createElement('div');q.className='vq';wrap.appendChild(a);wrap.appendChild(q);
+  const need=Math.min(240,Math.max(30,Math.round(lenSec(v.len)*0.5)));let timer=null;
+  function paint(){clearInterval(timer);if(G.seen[v.id]){q.innerHTML='<span class="ok">✔ צפיתם ועניתם נכון על השאלות (+5)</span>';return}
+    const t0=G.vopen[v.id];if(!t0){q.innerHTML='<span class="muted">אחרי הצפייה: 2 שאלות על הסרטון. תשובה נכונה פותחת את הבוס.</span>';return}
+    const left=Math.ceil((t0+need*1000-Date.now())/1000);
+    if(left>0){q.innerHTML=`<span class="muted">⏱ צופים? השאלות ייפתחו בעוד <b>${fmtT(left)}</b></span>`;timer=setInterval(paint,1000);return}
+    q.innerHTML='<button type="button" class="btn">📝 ענו על 2 שאלות על הסרטון</button>';q.querySelector('button').addEventListener('click',()=>quiz(0))}
+  function quiz(attempt){const picks={};q.innerHTML=v.qz.map((x,i)=>{const ord=attempt?shuffle([0,1,2,3]):[0,1,2,3];return `<div class="q"><div class="qt">${i+1}. ${x.q}</div><div class="opts">${ord.map(j=>`<button type="button" class="opt" data-i="${i}" data-j="${j}">${x.o[j]}</button>`).join('')}</div><div class="why"></div></div>`}).join('')+`<div class="ctrls"><button type="button" class="btn vqs" disabled>בדקו</button></div>`;
+    const sub=q.querySelector('.vqs');
+    q.querySelectorAll('.opt').forEach(o=>o.addEventListener('click',()=>{if(o.disabled)return;const d=o.closest('.q');d.querySelectorAll('.opt').forEach(x=>x.classList.remove('pick'));o.classList.add('pick');picks[o.dataset.i]=+o.dataset.j;sub.disabled=Object.keys(picks).length<v.qz.length}));
+    sub.addEventListener('click',()=>{let ok=0;q.querySelectorAll('.q').forEach((d,i)=>{const good=picks[i]===v.qz[i].a;if(good)ok++;d.querySelectorAll('.opt').forEach(x=>{x.disabled=true;if(+x.dataset.j===picks[i])x.classList.add(good?'right':'wrong')});d.querySelector('.why').textContent=good?'נכון!':'לא נכון. חזרו לסרטון ונסו שוב.'});sub.disabled=true;
+      if(ok===v.qz.length){G.seen[v.id]=1;store.set('seen',G.seen);a.classList.add('seen');addPts(5,'סרטון + שאלות נכונות');if(Object.keys(G.seen).length>=3)award('watcher');setTimeout(()=>{paint();refreshBossLocks()},900)}
+      else{wrong();const b=document.createElement('button');b.type='button';b.className='btn ghost';b.textContent='↺ נסו שוב';b.addEventListener('click',()=>quiz(attempt+1));q.querySelector('.ctrls').appendChild(b)}})}
+  a.addEventListener('click',()=>{if(!G.vopen[v.id]){G.vopen[v.id]=Date.now();store.set('vopen',G.vopen)}setTimeout(paint,50)});
+  paint()}
+$$('[data-vids]').forEach(el=>{(VIDS[el.dataset.vids]||[]).forEach(v=>{const w=document.createElement('div');w.className='vwrap';el.appendChild(w);renderVideo(w,v)})});
 
 /* ═══════ sorting games ═══════ */
+/* a wrong chip is parked for the next round; the round ends only when the pool is empty */
 function sorter(root,items,fbGood){
-  const pool=root.querySelector('[data-pool]'),fb=root.querySelector('[data-fb]');let sel=null,left=items.length;
-  shuffle(items).forEach(it=>{const c=document.createElement('button');c.type='button';c.className='chip';c.textContent=it.t;c.dataset.g=it.g;c.addEventListener('click',()=>{$$('.chip.sel',root).forEach(x=>x.classList.remove('sel'));c.classList.add('sel');sel=c;fb.textContent='עכשיו לחצו על הקבוצה המתאימה';fb.className='feedback'});pool.appendChild(c)});
-  $$('.bin',root).forEach(bin=>{const go=()=>{if(!sel)return;
-      if(sel.dataset.g===bin.dataset.bin){const s=sel;s.classList.remove('sel');s.classList.add('ok');s.disabled=true;bin.querySelector('.items').appendChild(s);left--;fb.textContent=left?'נכון! נשארו '+left:'כל הכבוד! מיינתם הכול נכון. '+fbGood;fb.className='feedback good';sel=null;correct()}
-      else{const s=sel;s.classList.add('err');setTimeout(()=>s.classList.remove('err'),600);const it=items.find(i=>i.t===s.textContent);fb.textContent='לא בדיוק. '+(it&&it.why||'');fb.className='feedback bad';wrong()}};
+  const pool=root.querySelector('[data-pool]'),fb=root.querySelector('[data-fb]');
+  const retry=document.createElement('div');retry.className='pool retry';retry.hidden=true;retry.innerHTML='<span class="rlabel">לסיבוב הבא:</span>';pool.after(retry);
+  let sel=null,left=items.length,round=1,missed=[];
+  const activeLeft=()=>$$('.chip:not([disabled])',pool).length;
+  function nextRound(){if(!missed.length)return;round++;shuffle(missed).forEach(c=>{c.disabled=false;c.classList.remove('err','wait');pool.appendChild(c)});missed=[];retry.hidden=true;fb.textContent='סיבוב '+round+': עכשיו רק מה שפספסתם ('+activeLeft()+'). קראו את ההסבר שקיבלתם ונסו שוב.';fb.className='feedback'}
+  shuffle(items).forEach(it=>{const c=document.createElement('button');c.type='button';c.className='chip';c.textContent=it.t;c.dataset.g=it.g;c.addEventListener('click',()=>{if(c.disabled)return;$$('.chip.sel',root).forEach(x=>x.classList.remove('sel'));c.classList.add('sel');sel=c;fb.textContent='עכשיו לחצו על הקבוצה המתאימה';fb.className='feedback'});pool.appendChild(c)});
+  $$('.bin',root).forEach(bin=>{const go=()=>{if(!sel)return;const s=sel;sel=null;s.classList.remove('sel');
+      if(s.dataset.g===bin.dataset.bin){s.classList.add('ok');s.disabled=true;bin.querySelector('.items').appendChild(s);left--;
+        if(round===1)correct();else addPts(5,'נכון בסיבוב '+round);
+        if(!left){fb.textContent='כל הכבוד! מיינתם הכול נכון'+(round>1?' (ב-'+round+' סיבובים)':' בסיבוב אחד')+'. '+fbGood;fb.className='feedback good'}
+        else{fb.textContent='נכון! נשארו '+left;fb.className='feedback good';if(!activeLeft())setTimeout(nextRound,700)}}
+      else{const it=items.find(i=>i.t===s.textContent);fb.textContent='לא בדיוק. '+(it&&it.why||'')+' הפריט עובר לסיבוב הבא.';fb.className='feedback bad';wrong();s.classList.add('err','wait');s.disabled=true;missed.push(s);retry.hidden=false;retry.appendChild(s);if(!activeLeft())setTimeout(nextRound,1500)}};
     bin.addEventListener('click',go);bin.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go()}})});
 }
 sorter($('#sort1'),[
@@ -822,7 +901,7 @@ setAlly(0);
 /* ═══════ demo 5: fronts ═══════ */
 const FRONTS=[
  {n:'החזית המערבית',chain:['אוגוסט 1914: גרמניה פולשת לבלגיה ולצרפת','נבלמת על נהר המרן, 40 ק״מ מפריז','שני הצבאות מתחפרים: כ-700 ק״מ','מלחמה נייחת ומלחמת התשה','מלחמת מגננה, קרבנות רבים'],note:'התכנית הגרמנית הייתה הכרעה מהירה בצרפת. כשהיא נכשלה, החזית קפאה לארבע שנים. כל התקפה: הפגזה, הסתערות מול מקלעים, מאות אלפי הרוגים, וכמה מאות מטרים.',quote:'אריך מריה רמרק, "במערב אין כל חדש": החזית היא כלוב שבו ממתינים בעצבנות למה שיקרה. חיים במתח של אי-ודאות; פגז יכול לפגוע בכל רגע. "כל חייל נשאר בחיים בזכות אלף מקרים".'},
- {n:'החזית המזרחית (רוסיה)',chain:['קו חזית לאורך מאות ק״מ, מהים הבלטי לים השחור','גם כאן מלחמה נייחת','ברוסיה: מחסור במזון, מיליוני הרוגים, חוסר אמון בשלטון','פברואר 1917: מהפכה, הצאר ניקולאי השני מודח','אוקטובר 1917: מהפכה נוספת','3 במרס 1918: הסכם ברסט-ליטובסק, רוסיה פורשת'],note:'פרישת רוסיה סייעה למדינות המרכז: גרמניה יכלה להעביר כוחות מהמזרח למערב. ההסכם נחתם בעיר ברסט-ליטובסק (היום בבלארוס) בין רוסיה לכל מעצמות המרכז.',quote:'בשביל המבחן: מלחמה ← מחסור ומצוקה ← חוסר אמון ← מהפכה ← פרישה מהמלחמה. זו שרשרת של סיבה ותוצאה.'},
+ {n:'החזית המזרחית (רוסיה)',chain:['קו חזית לאורך מאות ק״מ, מהים הבלטי לים השחור','גם כאן מלחמה נייחת','רוסיה מאבדת שטחים רבים; מחסור במזון, מיליוני הרוגים, חוסר אמון בשלטון','פברואר 1917: מהפכה, הצאר ניקולאי השני מודח','אוקטובר 1917: מהפכה נוספת','3 במרס 1918: הסכם ברסט-ליטובסק, רוסיה פורשת'],note:'פרישת רוסיה סייעה למדינות המרכז: גרמניה יכלה להעביר כוחות מהמזרח למערב. ההסכם נחתם בעיר ברסט-ליטובסק (היום בבלארוס) בין רוסיה לכל מעצמות המרכז.',quote:'בשביל המבחן: מלחמה ← מחסור ומצוקה ← חוסר אמון ← מהפכה ← פרישה מהמלחמה. זו שרשרת של סיבה ותוצאה.'},
  {n:'חזית המזרח התיכון',chain:['מדינות ההסכמה נגד האימפריה העות׳מאנית','1916: הסכם סייקס-פיקו (בריטניה וצרפת מחלקות ביניהן את שטחי העות׳מאנים)','1916: הבריטים כובשים את חצי האי סיני','1917–1918: כיבוש ארץ ישראל','2 בנובמבר 1917: הצהרת בלפור'],note:'סייקס-פיקו: הסכם סודי שנקרא על שם מארק סייקס (משרד החוץ הבריטי) וז׳ורז׳ פיקו (משרד החוץ הצרפתי). הצהרת בלפור: מכתב של שר החוץ הבריטי שהביע אהדה לשאיפות הציונים בארץ ישראל.',quote:'במקביל, 1915–1916: הטרגדיה של העם הארמני בידי הטורקים (ראו למטה).'}
 ];
 FRONTS.forEach((f,i)=>{const b=document.createElement('button');b.type='button';b.className='chip'+(i===0?' sel':'');b.textContent=f.n;b.addEventListener('click',()=>{$$('#frontbtns .chip').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');setFront(f);if(i>0)demoPlayed('fronts')});$('#frontbtns').appendChild(b)});
@@ -831,7 +910,7 @@ setFront(FRONTS[0]);
 
 /* ═══════ event-chain builder (station 4) ═══════ */
 const BUILD=[
- {task:'מסרייבו למלחמת עולם (1914)',order:['28 ביוני: גברילו פרינציפ רוצח את פרנץ פרדיננד בסרייבו','אוסטרו-הונגריה מאשימה את סרביה ברצח','אולטימטום לסרביה: לפרק ארגונים לאומיים, לאפשר חקירה אוסטרית','סרביה מקבלת את רוב הדרישות','28 ביולי: אוסטרו-הונגריה מכריזה מלחמה על סרביה','מערכת הבריתות: תוך חודש כל מעצמות אירופה במלחמה']},
+ {task:'מסרייבו למלחמת עולם (1914)',order:['28 ביוני: גברילו פרינציפ רוצח את פרנץ פרדיננד בסרייבו','אוסטרו-הונגריה מאשימה את סרביה ברצח','אולטימטום לסרביה: לפרק ארגונים לאומיים, פיקוח על העיתונות, חקירה אוסטרית','סרביה מקבלת את רוב הדרישות','28 ביולי: אוסטרו-הונגריה מכריזה מלחמה על סרביה','מערכת הבריתות: תוך חודש כל מעצמות אירופה במלחמה']},
  {task:'איך נבנו שני הגושים (1871–1907)',order:['1871: איחוד גרמניה, מאזן הכוחות מתערער','1879: ברית גרמניה–אוסטרו-הונגריה','1882: איטליה מצטרפת, הברית המשולשת','1893: ברית רוסיה–צרפת','1904: ההסכמה הלבבית בריטניה–צרפת','1907: ההסכמה המשולשת']},
  {task:'למה ארה״ב נכנסה (1915–1917)',order:['מאי 1915: צוללת גרמנית מטביעה את הלוזיטניה','וילסון מזהיר את גרמניה, היא מפסיקה זמנית','1917: גרמניה מחדשת מלחמת צוללות בלתי מוגבלת','פברואר 1917: מהפכה ברוסיה, הצאר מודח','אפריל 1917: ארה״ב מצטרפת למדינות ההסכמה']}
 ];
@@ -845,6 +924,49 @@ function renderBuilder(){const b=BUILD[bi],root=$('#builder');let placed=[];
   $('#bundo').addEventListener('click',()=>{const last=placed.pop();if(!last)return;$$('#bpool .chip').forEach(c=>{if(c.textContent===last){c.disabled=false;c.classList.remove('ok')}});fb.textContent='';fb.className='feedback';draw()});
   $('#bnext').addEventListener('click',()=>{bi=(bi+1)%BUILD.length;renderBuilder()});draw()}
 renderBuilder();
+
+/* ═══════ europe 1914 map game (schematic shapes) ═══════ */
+const MAP=[
+ {n:'בריטניה',b:'e',p:'150,95 200,85 230,120 240,170 225,215 195,245 160,250 140,210 135,150'},
+ {n:'צרפת',b:'e',p:'240,255 300,240 335,262 350,300 345,345 300,370 255,360 220,320 225,280'},
+ {n:'בלגיה',b:'e',p:'300,228 340,222 350,246 318,258 300,250'},
+ {n:'ספרד',b:'n',p:'170,375 240,372 300,378 295,430 250,465 185,462 160,420'},
+ {n:'גרמניה',b:'c',p:'350,205 420,180 470,195 475,255 445,290 390,300 352,278 342,245'},
+ {n:'שווייץ',b:'n',p:'352,302 390,302 398,322 362,334'},
+ {n:'אוסטרו-הונגריה',b:'c',p:'398,300 478,286 545,282 585,310 565,350 505,358 445,350 405,342'},
+ {n:'איטליה',b:'e',p:'372,338 402,345 428,368 468,400 500,440 480,468 445,430 405,385 368,355'},
+ {n:'רוסיה',b:'e',p:'478,100 690,80 800,105 825,250 765,320 660,305 590,280 548,270 480,250 475,195'},
+ {n:'סרביה',b:'e',p:'503,362 538,356 550,386 522,404 498,392'},
+ {n:'רומניה',b:'e',p:'548,332 610,322 628,352 585,370 552,360'},
+ {n:'בולגריה',b:'c',p:'552,374 600,370 628,396 582,416 553,408'},
+ {n:'יוון',b:'e',p:'510,412 562,420 578,470 532,492 500,452'},
+ {n:'האימפריה העות׳מאנית',b:'c',p:'605,378 700,340 800,380 825,450 700,492 628,462 590,422'}
+];
+(function(){const svg=$('#eumap'),NS='http://www.w3.org/2000/svg',el={};
+  MAP.forEach(c=>{const pg=document.createElementNS(NS,'polygon');pg.setAttribute('points',c.p);pg.setAttribute('class','cty');pg.dataset.n=c.n;svg.appendChild(pg);el[c.n]=pg});
+  MAP.forEach(c=>{const pts=c.p.split(' ').map(s=>s.split(',').map(Number));const cx=pts.reduce((a,p)=>a+p[0],0)/pts.length,cy=pts.reduce((a,p)=>a+p[1],0)/pts.length;const t=document.createElementNS(NS,'text');t.setAttribute('x',cx);t.setAttribute('y',cy+4);t.setAttribute('class','clabel');t.textContent=c.n;svg.appendChild(t)});
+  const M={find:store.get('mapfind',0),paint:store.get('mappaint',0)};
+  let mode='find',queue=[],cur=null,round=1,missed=[],found=0,paint={};
+  const fb=$('#map-fb'),task=$('#map-task'),ctr=$('#map-ctrls');
+  function reset(){Object.values(el).forEach(p=>p.setAttribute('class','cty'));fb.textContent='';fb.className='feedback';ctr.innerHTML=''}
+  function startFind(){reset();queue=shuffle(MAP.map(c=>c.n));missed=[];round=1;found=0;nextFind()}
+  function nextFind(){if(!queue.length){if(missed.length){round++;queue=shuffle(missed);missed=[];fb.textContent='סיבוב '+round+': רק המדינות שפספסתם ('+queue.length+').';fb.className='feedback'}
+      else{cur=null;task.innerHTML='🎉 מצאתם את כל 14 המדינות'+(round>1?' ב-'+round+' סיבובים':' בסיבוב אחד')+'!';M.find=14;store.set('mapfind',14);$('#map-find').textContent=14;addPts(20,'מפה: כל המדינות');if(M.paint)award('map');confetti();ctr.innerHTML='<button type="button" class="btn ghost" id="map-again">↺ עוד סיבוב</button>';$('#map-again').addEventListener('click',startFind);return}}
+    cur=queue.shift();task.innerHTML='לחצו על: <b style="color:var(--accent);font-size:18px">'+cur+'</b>'+(round>1?' (סיבוב '+round+')':'')}
+  function clickFind(n){if(!cur)return;const p=el[n],c=cur;
+    if(n===c){p.classList.add('hit','lock');fb.textContent='נכון!';fb.className='feedback good';if(round===1){correct('מפה');found++;M.find=Math.max(M.find,found);store.set('mapfind',M.find);$('#map-find').textContent=M.find}else addPts(5,'נכון בסיבוב '+round);nextFind()}
+    else{p.classList.add('miss');el[c].classList.add('hit');setTimeout(()=>{p.classList.remove('miss');if(!el[c].classList.contains('lock'))el[c].classList.remove('hit')},1000);fb.textContent='לא. לחצתם על '+n+'. '+c+' מהבהבת בירוק, והיא תחזור בסיבוב הבא.';fb.className='feedback bad';wrong();missed.push(c);cur=null;setTimeout(nextFind,1000)}}
+  function startPaint(){reset();paint={};round=1;task.innerHTML='לחצו על מדינה כדי לצבוע אותה (כל לחיצה מחליפה צבע): <b style="color:var(--heat)">אדום = מרכז</b>, <b style="color:var(--kin)">כחול = הסכמה</b>, אפור = ניטרלית. בסוף לחצו "בדקו".';ctr.innerHTML='<button type="button" class="btn" id="map-check">בדקו את המפה</button>';$('#map-check').addEventListener('click',checkPaint)}
+  function clickPaint(n){const seq=['','c','e','n'];const i=seq.indexOf(paint[n]||'');paint[n]=seq[(i+1)%4];el[n].setAttribute('class','cty '+paint[n])}
+  function checkPaint(){let bad=0,empty=0,done=0;MAP.forEach(c=>{if(el[c.n].classList.contains('lock')){done++;return}const v=paint[c.n]||'';if(!v)empty++;else if(v===c.b){el[c.n].classList.add('lock');done++}else{bad++;el[c.n].setAttribute('class','cty');paint[c.n]=''}});
+    if(bad||empty){if(bad)wrong();round++;fb.textContent=(bad?bad+' מדינות נצבעו לא נכון ונמחקו. ':'')+(empty?empty+' עדיין לא צבועות. ':'')+'סיבוב '+round+': תקנו ובדקו שוב. ('+done+'/14 נכונות ונעולות)';fb.className='feedback bad';return}
+    fb.textContent='🎉 המפה נכונה'+(round>1?' (סיבוב '+round+')':'')+'! מרכז: גרמניה, אוסטרו-הונגריה, העות׳מאנית, בולגריה. הסכמה: בריטניה, צרפת, בלגיה, רוסיה, סרביה, איטליה, רומניה, יוון. ניטרליות: ספרד, שווייץ.';fb.className='feedback good';
+    if(!M.paint){M.paint=1;store.set('mappaint',1);correct('מפה צבועה נכון');addPts(20,'מפה שלמה')}$('#map-paint').textContent='✔ הושלם';if(M.find>=14)award('map');confetti();ctr.innerHTML='<button type="button" class="btn ghost" id="map-again2">↺ לצבוע שוב</button>';$('#map-again2').addEventListener('click',startPaint)}
+  svg.addEventListener('click',e=>{const p=e.target.closest('.cty');if(!p)return;if(mode==='find')clickFind(p.dataset.n);else if(!p.classList.contains('lock'))clickPaint(p.dataset.n)});
+  function setMode(m){mode=m;$$('#mapmodes .chip').forEach(b=>b.classList.toggle('sel',b.dataset.m===m));if(m==='find')startFind();else startPaint()}
+  [['find','🔍 איפה זה?'],['paint','🎨 צבעו את המפה']].forEach(([m,l],i)=>{const b=document.createElement('button');b.type='button';b.className='chip'+(i===0?' sel':'');b.dataset.m=m;b.textContent=l;b.addEventListener('click',()=>setMode(m));$('#mapmodes').appendChild(b)});
+  $('#map-find').textContent=M.find;$('#map-paint').textContent=M.paint?'✔ הושלם':'לא הושלם';setMode('find');
+})();
 
 /* ═══════ boss quizzes ═══════ */
 const BOSS={
@@ -885,22 +1007,26 @@ const BOSS={
   explain:'תסביר להורה למה "חזית ועורף מיטשטשים" במלחמה טוטלית, עם 3 דוגמאות מהספר (כלכלה, נשים, תעמולה).'}
 };
 function markDone(key){$(`section[data-st="${key}"] [data-donemark]`).textContent='✔ הושלם'}
+function updBossLock(key){const sub=$('#bsub-'+key),n=$('#bvl-'+key);if(!sub||sub.hidden)return;const ok=stationVideoOK(key);n.textContent=ok?'':'🔒 הבוס נעול: צפו בסרטון אחד מהרשימה למעלה וענו נכון על 2 השאלות שלו.';n.className='feedback'+(ok?'':' bad');sub.disabled=!ok||(+sub.dataset.picks||0)<3}
+function refreshBossLocks(){STATIONS.forEach(updBossLock)}
+/* on a retry the options are shuffled and wrong answers are not revealed, so guessing does not pay */
 function renderBoss(key){const el=$(`[data-boss="${key}"]`),b=BOSS[key],saved=G.boss[key],tries=G.tries[key]||0;
-  el.innerHTML=`<div class="bh"><span class="ico">👑</span><h3>בוס ${STATIONS.indexOf(key)+1}: 3 שאלות</h3><span class="bst">${saved?('ניצחתם '+saved.score+'/3'+(saved.tries>1?' (ניסיון '+saved.tries+')':'')):(tries?'ניסיון '+(tries+1)+'. ':'')+'2/3 ומעלה פותח את התחנה הבאה'}</span></div><div class="stack" id="bq-${key}"></div><div class="ctrls" style="margin-top:12px"><button class="btn" id="bsub-${key}" disabled>הגישו תשובות</button></div><div id="bres-${key}"></div><div class="explain"><span style="font-size:22px">🗣️</span><div class="txt"><b>עכשיו תסבירו להורה:</b> ${b.explain}</div><label><input type="checkbox" data-explain="${key}" ${G.explained[key]?'checked disabled':''}> הסברתי</label></div>`;
+  el.innerHTML=`<div class="bh"><span class="ico">👑</span><h3>בוס ${STATIONS.indexOf(key)+1}: 3 שאלות</h3><span class="bst">${saved?('ניצחתם '+saved.score+'/3'+(saved.tries>1?' (ניסיון '+saved.tries+')':'')):(tries?'ניסיון '+(tries+1)+'. ':'')+'2/3 ומעלה פותח את התחנה הבאה'}</span></div><div class="stack" id="bq-${key}"></div><div class="ctrls" style="margin-top:12px"><button class="btn" id="bsub-${key}" disabled data-picks="0">הגישו תשובות</button></div><div class="feedback" id="bvl-${key}"></div><div id="bres-${key}"></div><div class="explain"><span style="font-size:22px">🗣️</span><div class="txt"><b>עכשיו תסבירו להורה:</b> ${b.explain}</div><label><input type="checkbox" data-explain="${key}" ${G.explained[key]?'checked disabled':''}> הסברתי</label></div>`;
   const list=$('#bq-'+key),sub=$('#bsub-'+key),res=$('#bres-'+key);const picks={};
-  b.q.forEach((q,i)=>{const d=document.createElement('div');d.className='q';d.innerHTML=`<div class="qt">${i+1}. ${q.q}</div><div class="opts">${q.o.map((o,j)=>`<button type="button" class="opt" data-j="${j}">${o}</button>`).join('')}</div><div class="why"></div>`;list.appendChild(d);
-    d.querySelectorAll('.opt').forEach(o=>o.addEventListener('click',()=>{if(d.dataset.locked)return;d.querySelectorAll('.opt').forEach(x=>x.classList.remove('pick'));o.classList.add('pick');picks[i]=+o.dataset.j;sub.disabled=Object.keys(picks).length<3}))});
+  b.q.forEach((q,i)=>{const ord=tries>0?shuffle([0,1,2,3]):[0,1,2,3];const d=document.createElement('div');d.className='q';d.innerHTML=`<div class="qt">${i+1}. ${q.q}</div><div class="opts">${ord.map(j=>`<button type="button" class="opt" data-j="${j}">${q.o[j]}</button>`).join('')}</div><div class="why"></div>`;list.appendChild(d);
+    d.querySelectorAll('.opt').forEach(o=>o.addEventListener('click',()=>{if(d.dataset.locked)return;d.querySelectorAll('.opt').forEach(x=>x.classList.remove('pick'));o.classList.add('pick');picks[i]=+o.dataset.j;sub.dataset.picks=Object.keys(picks).length;updBossLock(key)}))});
   if(saved){list.querySelectorAll('.q').forEach((d,i)=>{d.dataset.locked=1;d.querySelectorAll('.opt').forEach(o=>{o.disabled=true;if(+o.dataset.j===b.q[i].a)o.classList.add('right')})});sub.hidden=true;el.classList.add('passed');markDone(key)}
-  sub.addEventListener('click',()=>{let score=0;const thisTry=tries+1;G.tries[key]=thisTry;store.set('tries',G.tries);
-    list.querySelectorAll('.q').forEach((d,i)=>{d.dataset.locked=1;const ok=picks[i]===b.q[i].a;if(ok)score++;d.querySelectorAll('.opt').forEach(o=>{o.disabled=true;const j=+o.dataset.j;o.classList.remove('pick');if(j===b.q[i].a)o.classList.add('right');else if(j===picks[i])o.classList.add('wrong')});d.querySelector('.why').textContent=ok?'נכון!':'לא נכון. התשובה הנכונה מסומנת בירוק.';if(ok)correct('בוס: תשובה נכונה');else{wrong();G.wrongTopics[key]=(G.wrongTopics[key]||0)+1;store.set('wrongTopics',G.wrongTopics)}});
-    sub.hidden=true;const pass=score>=2;
+  sub.addEventListener('click',()=>{if(!stationVideoOK(key))return;let score=0;const thisTry=tries+1;G.tries[key]=thisTry;store.set('tries',G.tries);const pass0=Object.keys(picks).filter(i=>picks[i]===b.q[i].a).length>=2;
+    list.querySelectorAll('.q').forEach((d,i)=>{d.dataset.locked=1;const ok=picks[i]===b.q[i].a;if(ok)score++;d.querySelectorAll('.opt').forEach(o=>{o.disabled=true;const j=+o.dataset.j;o.classList.remove('pick');if(pass0&&j===b.q[i].a)o.classList.add('right');else if(j===picks[i])o.classList.add(ok?'right':'wrong')});d.querySelector('.why').textContent=ok?'נכון!':(pass0?'לא נכון. התשובה הנכונה מסומנת בירוק.':'לא נכון. חזרו להסבר בתחנה ונסו שוב (האפשרויות יתערבבו).');if(ok)correct('בוס: תשובה נכונה');else{wrong();G.wrongTopics[key]=(G.wrongTopics[key]||0)+1;store.set('wrongTopics',G.wrongTopics)}});
+    sub.hidden=true;$('#bvl-'+key).textContent='';const pass=score>=2;
     if(pass){G.boss[key]={score,tries:thisTry};store.set('boss',G.boss);el.classList.add('passed');markDone(key);const idx=STATIONS.indexOf(key);if(idx<STATIONS.length-1){G.unlocked[STATIONS[idx+1]]=true;store.set('unlocked',G.unlocked);applyLocks()}
       addPts(score*5,'ניצחון על הבוס');if(score===3){addPts(20,'בוס מושלם 3/3');if(thisTry===1)award('perfect')}award('st_'+key);confetti();
       res.innerHTML=`<div class="result pass">🎉 <b>ניצחתם את הבוס ${score}/3!</b> ${idx<STATIONS.length-1?'תחנה '+(idx+2)+' נפתחה. <a href="#'+STATIONS[idx+1]+'">קדימה ←</a>':'סיימתם את כל 7 התחנות! עכשיו ציר הזמן והמבחן המסכם.'}</div>`;
       if(STATIONS.every(s=>G.boss[s]))award('full');if(STATIONS.every(s=>G.boss[s]&&G.boss[s].score===3))award('allperfect')}
     else{res.innerHTML=`<div class="result fail">😤 <b>${score}/3.</b> הבוס עוד לא נוצח. חזרו על ההסבר למעלה ונסו שוב. <button class="btn ghost" id="bretry-${key}">↺ נסו שוב</button></div>`;$('#bretry-'+key).addEventListener('click',()=>renderBoss(key))}
     renderNav()});
-  el.querySelector('[data-explain]').addEventListener('change',e=>{if(e.target.checked){e.target.disabled=true;G.explained[key]=1;store.set('explained',G.explained);addPts(15,'הסברתם להורה');if(Object.keys(G.explained).length>=4)award('teacher')}})}
+  el.querySelector('[data-explain]').addEventListener('change',e=>{if(e.target.checked){e.target.disabled=true;G.explained[key]=1;store.set('explained',G.explained);addPts(15,'הסברתם להורה');if(Object.keys(G.explained).length>=4)award('teacher')}});
+  updBossLock(key)}
 STATIONS.forEach(renderBoss);
 function applyLocks(){STATIONS.forEach(k=>{$(`section[data-st="${k}"]`).classList.toggle('locked',!G.unlocked[k])});renderNav()}
 function renderNav(){STATIONS.forEach(k=>{const a=$(`#navchips a[data-st="${k}"]`);a.classList.toggle('done',!!G.boss[k]);a.classList.toggle('lock',!G.unlocked[k]);a.textContent=(G.boss[k]?'✔ ':(G.unlocked[k]?'':'🔒 '))+(STATIONS.indexOf(k)+1)+' '+STNAMES[k]})}
@@ -937,7 +1063,7 @@ renderQuiz();
 
 /* ═══════ flashcards: sprint + smart ═══════ */
 const FC=[
- ['1871','איחוד גרמניה (וילהלם הראשון, ביסמרק). אלזס-לורן עוברת לגרמניה. מאזן הכוחות מתערער.'],['הברית המשולשת (1882)','גרמניה, אוסטרו-הונגריה, איטליה'],['ההסכמה המשולשת (1907)','בריטניה, צרפת, רוסיה'],['ההסכמה הלבבית (1904)','הסכם מדיני (לא צבאי) בין בריטניה לצרפת'],['הבדידות המזהרת','מדיניות בריטניה: בלי בריתות באירופה, להסתמך על הצי והאימפריה'],['ברית רוסיה–צרפת','1893. גרמניה חוששת ממלחמה בשתי חזיתות'],['אלזס-לורן','חבל שצרפת מסרה לגרמניה ב-1871. "המחוזות השדודים". פגיעה בגאווה הלאומית'],['חבית אבק השרפה של אירופה','הבלקן: עמים רוצים עצמאות, רוסיה ואוסטרו-הונגריה מתחרות'],['1908','אוסטרו-הונגריה מספחת את בוסניה והרצגובינה. סרביה זועמת, רוסיה תומכת בה'],['מלחמות הבלקן','1912–1913: בולגריה, סרביה, מונטנגרו ויוון נגד העות׳מאנים'],['משבר מרוקו','1905 ו-1911 (אגדיר): גרמניה נגד צרפת. דוגמה לאימפריאליזם. בריטניה וצרפת מתקרבות'],['מרוץ החימוש','תקציבי ביטחון, נשק, שירות צבאי ארוך, צי (גרמניה מול בריטניה), תכניות מלחמה'],['4 הגורמים למלחמה','מערכת הבריתות, מאבקים לאומיים, המרוץ האימפריאליסטי, מרוץ החימוש'],['28 ביוני 1914','גברילו פרינציפ רוצח את פרנץ פרדיננד (יורש העצר האוסטרו-הונגרי) בסרייבו'],['אולטימטום','דרישות אוסטרו-הונגריה מסרביה: לפרק ארגונים לאומיים, לאפשר חקירה אוסטרית. סרביה קיבלה את רובן'],['28 ביולי 1914','אוסטרו-הונגריה מכריזה מלחמה על סרביה. תוך חודש כל אירופה במלחמה'],['מדינות המרכז','גרמניה, אוסטרו-הונגריה, האימפריה העות׳מאנית, בולגריה'],['מדינות ההסכמה','בריטניה, צרפת, רוסיה (+ איטליה 1915, ארה״ב 1917)'],['נהר המרן','שם נבלמו הגרמנים ב-1914, 40 ק״מ מפריז. מכאן מלחמת חפירות'],['מלחמת חפירות = 4 מילים','נייחת, התשה, מגננה, קרבנות רבים. 700 ק״מ של חפירות'],['במערב אין כל חדש','ספרו של אריך מריה רמרק, חייל גרמני, על החיים בחפירות'],['פברואר 1917','מהפכה ברוסיה, הצאר ניקולאי השני מודח'],['ברסט-ליטובסק','3 במרס 1918: רוסיה חותמת שלום עם מדינות המרכז ופורשת מהמלחמה'],['סייקס-פיקו','1916: בריטניה וצרפת מחלקות ביניהן את שטחי האימפריה העות׳מאנית'],['הצהרת בלפור','2 בנובמבר 1917: שר החוץ הבריטי מביע אהדה לשאיפות הציונים בארץ ישראל'],['הטרגדיה הארמנית','1915–1916: הטורקים טובחים בארמנים, מאות אלפים עד יותר ממיליון'],['לוזיטניה','7 במאי 1915: אוניית נוסעים בריטית שהוטבעה בידי צוללת גרמנית. 128 אמריקנים נספו'],['4 גורמים לכניסת ארה״ב','מלחמת הצוללות, מניע כלכלי, המהפכה ברוסיה, הגנה על הדמוקרטיה (וילסון)'],['אפריל 1917','ארה״ב מצטרפת למדינות ההסכמה'],['הגדודים העבריים','טרומפלדור וז׳בוטינסקי. גדוד נהגי הפרדות (1915, גליפולי), גדודי קלעים 38, 39, 40'],['מלחמה טוטלית','מלחמה הקשורה לכל תחומי החיים. חזית ועורף מיטשטשים. גורמים: גיוס עממי + מהפכה תעשייתית'],['כלכלת מלחמה','הכלכלה כולה מגויסת לייצור נשק ואספקה. קצבות מזון, שוק שחור'],['נשים במלחמה','חיל עזר, אחיות, תעשייה כבדה, חקלאות, פקידות, תחבורה'],['כלי נשק חדשים','טנקים (1917), מטוסים, צוללות, מקלעים, תותחים ומרגמות, גז'],['תעמולה','לחזק את האוכלוסייה ולערער את רוח האויב: עיתונים, קריקטורות, כרזות, כרוזים ממטוסים']
+ ['1871','איחוד גרמניה (וילהלם הראשון, ביסמרק). אלזס-לורן עוברת לגרמניה. מאזן הכוחות מתערער.'],['הברית המשולשת (1882)','גרמניה, אוסטרו-הונגריה, איטליה'],['ההסכמה המשולשת (1907)','בריטניה, צרפת, רוסיה'],['ההסכמה הלבבית (1904)','הסכם מדיני (לא צבאי) בין בריטניה לצרפת'],['הבדידות המזהרת','מדיניות בריטניה: בלי בריתות באירופה, להסתמך על הצי והאימפריה'],['ברית רוסיה–צרפת','1893. גרמניה חוששת ממלחמה בשתי חזיתות'],['אלזס-לורן','חבל שצרפת מסרה לגרמניה ב-1871. "המחוזות השדודים". פגיעה בגאווה הלאומית'],['חבית אבק השרפה של אירופה','הבלקן: עמים רוצים עצמאות, רוסיה ואוסטרו-הונגריה מתחרות'],['1908','אוסטרו-הונגריה מספחת את בוסניה והרצגובינה. סרביה זועמת, רוסיה תומכת בה'],['מלחמות הבלקן','1912–1913: בולגריה, סרביה, מונטנגרו ויוון נגד העות׳מאנים'],['משבר מרוקו','1905 ו-1911 (אגדיר): גרמניה נגד צרפת. דוגמה לאימפריאליזם. בריטניה וצרפת מתקרבות'],['מרוץ החימוש','תקציבי ביטחון, נשק, שירות צבאי ארוך, צי (גרמניה מול בריטניה), תכניות מלחמה'],['4 הגורמים למלחמה','מערכת הבריתות, מאבקים לאומיים, המרוץ האימפריאליסטי, מרוץ החימוש'],['28 ביוני 1914','גברילו פרינציפ רוצח את פרנץ פרדיננד (יורש העצר האוסטרו-הונגרי) בסרייבו'],['אולטימטום','דרישות אוסטרו-הונגריה מסרביה: לפרק ארגונים לאומיים, פיקוח על העיתונות, לאפשר חקירה אוסטרית. סרביה קיבלה את רובן'],['28 ביולי 1914','אוסטרו-הונגריה מכריזה מלחמה על סרביה. תוך חודש כל אירופה במלחמה'],['מדינות המרכז','גרמניה, אוסטרו-הונגריה, האימפריה העות׳מאנית, בולגריה'],['מדינות ההסכמה','בריטניה, צרפת, רוסיה (+ איטליה 1915, ארה״ב 1917)'],['נהר המרן','שם נבלמו הגרמנים ב-1914, 40 ק״מ מפריז. מכאן מלחמת חפירות'],['מלחמת חפירות = 4 מילים','נייחת, התשה, מגננה, קרבנות רבים. 700 ק״מ של חפירות'],['במערב אין כל חדש','ספרו של אריך מריה רמרק, חייל גרמני, על החיים בחפירות'],['פברואר 1917','מהפכה ברוסיה, הצאר ניקולאי השני מודח'],['ברסט-ליטובסק','3 במרס 1918: רוסיה חותמת שלום עם מדינות המרכז ופורשת מהמלחמה'],['סייקס-פיקו','1916: בריטניה וצרפת מחלקות ביניהן את שטחי האימפריה העות׳מאנית'],['הצהרת בלפור','2 בנובמבר 1917: שר החוץ הבריטי מביע אהדה לשאיפות הציונים בארץ ישראל'],['הטרגדיה הארמנית','1915–1916: הטורקים טובחים בארמנים, מאות אלפים עד יותר ממיליון'],['לוזיטניה','7 במאי 1915: אוניית נוסעים בריטית שהוטבעה בידי צוללת גרמנית. 128 אמריקנים נספו'],['4 גורמים לכניסת ארה״ב','מלחמת הצוללות, מניע כלכלי, המהפכה ברוסיה, הגנה על הדמוקרטיה (וילסון)'],['אפריל 1917','ארה״ב מצטרפת למדינות ההסכמה'],['הגדודים העבריים','טרומפלדור וז׳בוטינסקי. גדוד נהגי הפרדות (1915, גליפולי), גדודי קלעים 38, 39, 40'],['מלחמה טוטלית','מלחמה הקשורה לכל תחומי החיים. חזית ועורף מיטשטשים. גורמים: גיוס עממי + מהפכה תעשייתית'],['כלכלת מלחמה','הכלכלה כולה מגויסת לייצור נשק ואספקה. קצבות מזון, שוק שחור'],['נשים במלחמה','חיל עזר, אחיות, תעשייה כבדה, חקלאות, פקידות, תחבורה'],['כלי נשק חדשים','טנקים (1917), מטוסים, צוללות, מקלעים, תותחים ומרגמות, גז'],['תעמולה','לחזק את האוכלוסייה ולערער את רוח האויב: עיתונים, קריקטורות, כרזות, כרוזים ממטוסים']
 ];
 function setCard(el,c){el.classList.remove('flip');el.innerHTML=`<div><div class="fq">${c[0]}<small>לחצו להפוך</small></div><div class="fa">${c[1]}</div></div>`}
 function bindFlip(el){const f=()=>el.classList.toggle('flip');el.addEventListener('click',f);el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();f()}})}
@@ -982,7 +1108,7 @@ stats();gen();
 
 /* ═══════ report ═══════ */
 function buildReport(){const passed=STATIONS.filter(k=>G.boss[k]);const lastQuiz=store.get('lastQuiz',null);const weak=Object.entries(G.wrongTopics).sort((a,b)=>b[1]-a[1]).filter(x=>x[1]>0).slice(0,3);const bd=BADGES.filter(b=>G.badges[b.k]);
-  const rows=[['רמה',LEVELS[levelOf(G.pts)][1]+' · '+G.pts+' נקודות'],['תחנות שהושלמו (בוס)',passed.length+' / 7'+(passed.length?': '+passed.map(k=>STNAMES[k]+' '+G.boss[k].score+'/3').join(', '):'')],['מבחן סיכום',lastQuiz==null?'עוד לא הושלם':lastQuiz+' / 15'],['רצף הכי ארוך',G.best+' תשובות'],['ספרינט (שיא בדקה)',G.sprint.best+' כרטיסיות ב-'+G.sprint.runs+' ספרינטים'],['חזרה חכמה',G.smart.done+' סיבובים שלמים'],['הסברתי להורה',Object.keys(G.explained).length+' / 7 תחנות'],['סרטונים שנפתחו',Object.keys(G.seen).length],['שאלות ציר זמן נכונות',G.tl.ok],['נושאים לחזור עליהם',weak.length?weak.map(x=>STNAMES[x[0]]+' ('+x[1]+' טעויות)').join(', '):'אין טעויות חוזרות 👏'],['תגים',bd.length+' / '+BADGES.length+(bd.length?': '+bd.map(b=>b.i+' '+b.n).join(', '):'')]];
+  const rows=[['רמה',LEVELS[levelOf(G.pts)][1]+' · '+G.pts+' נקודות'],['תחנות שהושלמו (בוס)',passed.length+' / 7'+(passed.length?': '+passed.map(k=>STNAMES[k]+' '+G.boss[k].score+'/3').join(', '):'')],['מבחן סיכום',lastQuiz==null?'עוד לא הושלם':lastQuiz+' / 15'],['רצף הכי ארוך',G.best+' תשובות'],['ספרינט (שיא בדקה)',G.sprint.best+' כרטיסיות ב-'+G.sprint.runs+' ספרינטים'],['חזרה חכמה',G.smart.done+' סיבובים שלמים'],['הסברתי להורה',Object.keys(G.explained).length+' / 7 תחנות'],['סרטונים שנצפו (עם שאלות נכונות)',Object.keys(G.seen).length+' / 21'],['שאלות ציר זמן נכונות',G.tl.ok],['נושאים לחזור עליהם',weak.length?weak.map(x=>STNAMES[x[0]]+' ('+x[1]+' טעויות)').join(', '):'אין טעויות חוזרות 👏'],['תגים',bd.length+' / '+BADGES.length+(bd.length?': '+bd.map(b=>b.i+' '+b.n).join(', '):'')]];
   $('#reportbody').innerHTML=rows.map(r=>`<div class="row"><b>${r[0]}</b><span>${r[1]}</span></div>`).join('');
   $('#reporttext').value='דוח לימוד: מלחמת העולם הראשונה · '+new Date().toLocaleDateString('he-IL')+'\n'+rows.map(r=>r[0]+': '+r[1]).join('\n')}
 $('#openreport').addEventListener('click',()=>{buildReport();$('#report').classList.add('open')});
