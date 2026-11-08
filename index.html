@@ -236,11 +236,16 @@ summary .ico{font-size:20px}
 .toast.badge{background:var(--gold);color:#1B1208}
 #confetti{position:fixed;inset:0;pointer-events:none;z-index:40}
 /* flashcards */
-.fc{background:var(--panel);border:1px solid var(--rule);border-radius:10px;min-height:150px;display:grid;place-items:center;text-align:center;padding:20px;cursor:pointer;font-size:20px;box-shadow:var(--shadow)}
-.fc .fa{display:none;color:var(--accent);font-weight:700}
-.fc.flip .fq{display:none} .fc.flip .fa{display:block}
+.fc{background:var(--panel);border:1px solid var(--rule);border-radius:10px;min-height:120px;display:grid;place-items:center;text-align:center;padding:20px;font-size:20px;box-shadow:var(--shadow);position:relative}
 .fc small{display:block;color:var(--muted);font-size:13px;margin-top:8px;font-weight:400}
-.rate{display:flex;gap:10px;justify-content:center;margin-top:10px}
+.fcopts{display:grid;gap:6px;margin-top:8px}
+.fcopts .opt{font-size:15px}
+/* read-aloud buttons */
+.spk{float:left;background:var(--panel);border:1px solid var(--rule);border-radius:999px;width:32px;height:32px;font-size:16px;line-height:1;cursor:pointer;margin:0 0 4px 8px;padding:0;color:var(--ink);flex:none}
+.spk:hover{border-color:var(--accent)}
+.spk.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.fc .spk{position:absolute;top:8px;left:8px;margin:0}
+.tcard .spk{float:none;display:inline-block;margin:6px 0 0;width:28px;height:28px;font-size:14px}
 .sprint-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;font-family:var(--display);font-weight:700}
 .sprint-top .timer{font-size:28px;color:var(--accent)}
 .sprint-top .timer.low{color:var(--bad)}
@@ -657,19 +662,19 @@ footer{padding-block:30px;color:var(--muted);font-size:14px;border-top:1px solid
   <div class="two">
     <div class="card">
       <div class="sprint-top"><span>⏱ ספרינט</span><span class="timer" id="sp-timer">60</span></div>
-      <p style="margin-top:6px;font-size:15px;color:var(--muted)">כמה כרטיסיות אתם יודעים בדקה? קוראים את השאלה, חושבים על התשובה, הופכים, ואומרים אם ידעתם. שיא אישי נשמר.</p>
+      <p style="margin-top:6px;font-size:15px;color:var(--muted)">כל כרטיסייה היא שאלה עם 3 תשובות. כמה נכונות בדקה? טעות מחזירה את הכרטיסייה לתור. שיא אישי נשמר.</p>
       <div class="sp"></div>
-      <div class="fc" id="sp-card" tabindex="0"><div><div class="fq">לחצו "התחל" ⬇</div><div class="fa"></div></div></div>
-      <div class="rate" id="sp-rate" hidden><button class="btn good" id="sp-yes">✔ ידעתי</button><button class="btn ghost" id="sp-no">✖ לא ידעתי</button></div>
+      <div class="fc" id="sp-card"><div><div class="fq">לחצו "התחל" ⬇</div></div></div>
+      <div class="fcopts" id="sp-opts"></div>
       <div class="ctrls"><button class="btn" id="sp-start">▶ התחל ספרינט</button></div>
       <div class="statline"><span>בסיבוב הזה: <b id="sp-score">0</b></span><span>שיא אישי: <b id="sp-best">0</b></span><span>ספרינטים: <b id="sp-runs">0</b></span></div>
     </div>
     <div class="card">
       <div class="sprint-top"><span>🧠 חזרה חכמה</span><span id="sm-left" style="color:var(--muted);font-size:14px"></span></div>
-      <p style="margin-top:6px;font-size:15px;color:var(--muted)">בלי שעון. כרטיסייה ש"לא ידעתי" חוזרת שוב עד שיודעים. מסיימים כשהערימה ריקה.</p>
+      <p style="margin-top:6px;font-size:15px;color:var(--muted)">בלי שעון. כל כרטיסייה היא שאלה עם 3 תשובות. טעות מחזירה אותה לערימה, ומסיימים רק כשכל הכרטיסיות נענו נכון.</p>
       <div class="sp"></div>
-      <div class="fc" id="sm-card" tabindex="0"><div><div class="fq">לחצו "התחל" ⬇</div><div class="fa"></div></div></div>
-      <div class="rate" id="sm-rate" hidden><button class="btn good" id="sm-yes">✔ ידעתי</button><button class="btn ghost" id="sm-no">✖ לא ידעתי, תחזירו</button></div>
+      <div class="fc" id="sm-card"><div><div class="fq">לחצו "התחל" ⬇</div></div></div>
+      <div class="fcopts" id="sm-opts"></div>
       <div class="ctrls"><button class="btn" id="sm-start">▶ התחל חזרה</button></div>
       <div class="statline"><span>סיבובים שהושלמו: <b id="sm-done">0</b></span></div>
     </div>
@@ -1065,21 +1070,19 @@ renderQuiz();
 const FC=[
  ['1871','איחוד גרמניה (וילהלם הראשון, ביסמרק). אלזס-לורן עוברת לגרמניה. מאזן הכוחות מתערער.'],['הברית המשולשת (1882)','גרמניה, אוסטרו-הונגריה, איטליה'],['ההסכמה המשולשת (1907)','בריטניה, צרפת, רוסיה'],['ההסכמה הלבבית (1904)','הסכם מדיני (לא צבאי) בין בריטניה לצרפת'],['הבדידות המזהרת','מדיניות בריטניה: בלי בריתות באירופה, להסתמך על הצי והאימפריה'],['ברית רוסיה–צרפת','1893. גרמניה חוששת ממלחמה בשתי חזיתות'],['אלזס-לורן','חבל שצרפת מסרה לגרמניה ב-1871. "המחוזות השדודים". פגיעה בגאווה הלאומית'],['חבית אבק השרפה של אירופה','הבלקן: עמים רוצים עצמאות, רוסיה ואוסטרו-הונגריה מתחרות'],['1908','אוסטרו-הונגריה מספחת את בוסניה והרצגובינה. סרביה זועמת, רוסיה תומכת בה'],['מלחמות הבלקן','1912–1913: בולגריה, סרביה, מונטנגרו ויוון נגד העות׳מאנים'],['משבר מרוקו','1905 ו-1911 (אגדיר): גרמניה נגד צרפת. דוגמה לאימפריאליזם. בריטניה וצרפת מתקרבות'],['מרוץ החימוש','תקציבי ביטחון, נשק, שירות צבאי ארוך, צי (גרמניה מול בריטניה), תכניות מלחמה'],['4 הגורמים למלחמה','מערכת הבריתות, מאבקים לאומיים, המרוץ האימפריאליסטי, מרוץ החימוש'],['28 ביוני 1914','גברילו פרינציפ רוצח את פרנץ פרדיננד (יורש העצר האוסטרו-הונגרי) בסרייבו'],['אולטימטום','דרישות אוסטרו-הונגריה מסרביה: לפרק ארגונים לאומיים, פיקוח על העיתונות, לאפשר חקירה אוסטרית. סרביה קיבלה את רובן'],['28 ביולי 1914','אוסטרו-הונגריה מכריזה מלחמה על סרביה. תוך חודש כל אירופה במלחמה'],['מדינות המרכז','גרמניה, אוסטרו-הונגריה, האימפריה העות׳מאנית, בולגריה'],['מדינות ההסכמה','בריטניה, צרפת, רוסיה (+ איטליה 1915, ארה״ב 1917)'],['נהר המרן','שם נבלמו הגרמנים ב-1914, 40 ק״מ מפריז. מכאן מלחמת חפירות'],['מלחמת חפירות = 4 מילים','נייחת, התשה, מגננה, קרבנות רבים. 700 ק״מ של חפירות'],['במערב אין כל חדש','ספרו של אריך מריה רמרק, חייל גרמני, על החיים בחפירות'],['פברואר 1917','מהפכה ברוסיה, הצאר ניקולאי השני מודח'],['ברסט-ליטובסק','3 במרס 1918: רוסיה חותמת שלום עם מדינות המרכז ופורשת מהמלחמה'],['סייקס-פיקו','1916: בריטניה וצרפת מחלקות ביניהן את שטחי האימפריה העות׳מאנית'],['הצהרת בלפור','2 בנובמבר 1917: שר החוץ הבריטי מביע אהדה לשאיפות הציונים בארץ ישראל'],['הטרגדיה הארמנית','1915–1916: הטורקים טובחים בארמנים, מאות אלפים עד יותר ממיליון'],['לוזיטניה','7 במאי 1915: אוניית נוסעים בריטית שהוטבעה בידי צוללת גרמנית. 128 אמריקנים נספו'],['4 גורמים לכניסת ארה״ב','מלחמת הצוללות, מניע כלכלי, המהפכה ברוסיה, הגנה על הדמוקרטיה (וילסון)'],['אפריל 1917','ארה״ב מצטרפת למדינות ההסכמה'],['הגדודים העבריים','טרומפלדור וז׳בוטינסקי. גדוד נהגי הפרדות (1915, גליפולי), גדודי קלעים 38, 39, 40'],['מלחמה טוטלית','מלחמה הקשורה לכל תחומי החיים. חזית ועורף מיטשטשים. גורמים: גיוס עממי + מהפכה תעשייתית'],['כלכלת מלחמה','הכלכלה כולה מגויסת לייצור נשק ואספקה. קצבות מזון, שוק שחור'],['נשים במלחמה','חיל עזר, אחיות, תעשייה כבדה, חקלאות, פקידות, תחבורה'],['כלי נשק חדשים','טנקים (1917), מטוסים, צוללות, מקלעים, תותחים ומרגמות, גז'],['תעמולה','לחזק את האוכלוסייה ולערער את רוח האויב: עיתונים, קריקטורות, כרזות, כרוזים ממטוסים']
 ];
-function setCard(el,c){el.classList.remove('flip');el.innerHTML=`<div><div class="fq">${c[0]}<small>לחצו להפוך</small></div><div class="fa">${c[1]}</div></div>`}
-function bindFlip(el){const f=()=>el.classList.toggle('flip');el.addEventListener('click',f);el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();f()}})}
-bindFlip($('#sp-card'));bindFlip($('#sm-card'));
-let spDeck=[],spScore=0,spT=null,spLeft=60,spOn=false;
+/* every card is a question with 3 answers (the right one + 2 answers of other cards); a miss re-queues the card */
+function fcOptions(c){const others=shuffle(FC.filter(x=>x!==c&&x[1]!==c[1])).slice(0,2).map(x=>x[1]);return shuffle([c[1],...others])}
+function showCard(cardEl,optsEl,c,onAnswer){cardEl.innerHTML=`<div><div class="fq">${c[0]}<small>בחרו את התשובה הנכונה</small></div></div>`;speakify(cardEl);optsEl.innerHTML='';delete optsEl.dataset.locked;
+  fcOptions(c).forEach(o=>{const b=document.createElement('button');b.type='button';b.className='opt';b.textContent=o;b.addEventListener('click',()=>{if(optsEl.dataset.locked)return;optsEl.dataset.locked=1;const ok=o===c[1];b.classList.add(ok?'right':'wrong');[...optsEl.children].forEach(x=>{x.disabled=true;if(!ok&&x.textContent===c[1])x.classList.add('right')});setTimeout(()=>onAnswer(ok),ok?350:1600)});optsEl.appendChild(b)})}
+let spDeck=[],spScore=0,spT=null,spLeft=60,spOn=false,spCur=null;
 $('#sp-best').textContent=G.sprint.best;$('#sp-runs').textContent=G.sprint.runs;$('#sm-left').textContent=FC.length+' כרטיסיות';
-function spNext(){if(!spDeck.length)spDeck=shuffle(FC);setCard($('#sp-card'),spDeck.pop())}
-function spEnd(){spOn=false;clearInterval(spT);$('#sp-rate').hidden=true;$('#sp-start').disabled=false;$('#sp-start').textContent='▶ עוד ספרינט';const isBest=spScore>G.sprint.best;$('#sp-card').classList.remove('flip');$('#sp-card').innerHTML=`<div><div class="fq">⏱ נגמר הזמן! <b style="color:var(--accent)">${spScore}</b> כרטיסיות בדקה<small>${isBest?'🏆 שיא אישי חדש!':'השיא שלכם: '+G.sprint.best}</small></div><div class="fa"></div></div>`;G.sprint.runs++;if(isBest){G.sprint.best=spScore;confetti()}store.set('sprint',G.sprint);$('#sp-best').textContent=G.sprint.best;$('#sp-runs').textContent=G.sprint.runs;addPts(spScore*2,'ספרינט: '+spScore+' כרטיסיות');if(spScore>=10)award('sprinter')}
-$('#sp-start').addEventListener('click',()=>{spOn=true;spScore=0;spLeft=60;spDeck=shuffle(FC);$('#sp-score').textContent=0;$('#sp-timer').textContent=60;$('#sp-timer').classList.remove('low');$('#sp-rate').hidden=false;$('#sp-start').disabled=true;spNext();clearInterval(spT);spT=setInterval(()=>{spLeft--;$('#sp-timer').textContent=spLeft;if(spLeft<=10)$('#sp-timer').classList.add('low');if(spLeft<=0)spEnd()},1000)});
-$('#sp-yes').addEventListener('click',()=>{if(!spOn)return;spScore++;$('#sp-score').textContent=spScore;spNext()});
-$('#sp-no').addEventListener('click',()=>{if(!spOn)return;spNext()});
-let smDeck=[],smOn=false,smCur=null;$('#sm-done').textContent=G.smart.done;
-function smNext(){if(!smDeck.length){smOn=false;$('#sm-rate').hidden=true;$('#sm-start').disabled=false;$('#sm-start').textContent='▶ עוד סיבוב';$('#sm-card').classList.remove('flip');$('#sm-card').innerHTML='<div><div class="fq">🧠 הערימה ריקה: ידעתם הכול!<small>סיבוב נוסף מחר יקבע את זה בזיכרון</small></div><div class="fa"></div></div>';$('#sm-left').textContent='הושלם';G.smart.done++;store.set('smart',G.smart);$('#sm-done').textContent=G.smart.done;addPts(30,'סיבוב חזרה חכמה הושלם');award('brain');confetti();return}smCur=smDeck.shift();setCard($('#sm-card'),smCur);$('#sm-left').textContent='נשארו '+(smDeck.length+1)}
-$('#sm-start').addEventListener('click',()=>{smOn=true;smDeck=shuffle(FC);$('#sm-rate').hidden=false;$('#sm-start').disabled=true;smNext()});
-$('#sm-yes').addEventListener('click',()=>{if(!smOn)return;addPts(1);smNext()});
-$('#sm-no').addEventListener('click',()=>{if(!smOn)return;smDeck.splice(Math.min(3,smDeck.length),0,smCur);smNext()});
+function spNext(){if(!spOn)return;if(!spDeck.length)spDeck=shuffle(FC);spCur=spDeck.shift();showCard($('#sp-card'),$('#sp-opts'),spCur,ok=>{if(!spOn)return;if(ok){spScore++;$('#sp-score').textContent=spScore}else spDeck.splice(Math.min(4,spDeck.length),0,spCur);spNext()})}
+function spEnd(){spOn=false;clearInterval(spT);$('#sp-opts').innerHTML='';$('#sp-start').disabled=false;$('#sp-start').textContent='▶ עוד ספרינט';const isBest=spScore>G.sprint.best;$('#sp-card').innerHTML=`<div><div class="fq">⏱ נגמר הזמן! <b style="color:var(--accent)">${spScore}</b> תשובות נכונות בדקה<small>${isBest?'🏆 שיא אישי חדש!':'השיא שלכם: '+G.sprint.best}</small></div></div>`;G.sprint.runs++;if(isBest){G.sprint.best=spScore;confetti()}store.set('sprint',G.sprint);$('#sp-best').textContent=G.sprint.best;$('#sp-runs').textContent=G.sprint.runs;addPts(spScore*2,'ספרינט: '+spScore+' נכונות');if(spScore>=10)award('sprinter')}
+$('#sp-start').addEventListener('click',()=>{spOn=true;spScore=0;spLeft=60;spDeck=shuffle(FC);$('#sp-score').textContent=0;$('#sp-timer').textContent=60;$('#sp-timer').classList.remove('low');$('#sp-start').disabled=true;spNext();clearInterval(spT);spT=setInterval(()=>{spLeft--;$('#sp-timer').textContent=spLeft;if(spLeft<=10)$('#sp-timer').classList.add('low');if(spLeft<=0)spEnd()},1000)});
+let smDeck=[],smOn=false,smCur=null,smMiss=0;$('#sm-done').textContent=G.smart.done;
+function smNext(){if(!smDeck.length){smOn=false;$('#sm-opts').innerHTML='';$('#sm-start').disabled=false;$('#sm-start').textContent='▶ עוד סיבוב';$('#sm-card').innerHTML='<div><div class="fq">🧠 הערימה ריקה: עניתם נכון על כל '+FC.length+' הכרטיסיות'+(smMiss?'<small>'+smMiss+' טעויות חזרו אליכם בדרך. סיבוב נוסף מחר יקבע את זה בזיכרון</small>':'<small>בלי אף טעות!</small>')+'</div></div>';$('#sm-left').textContent='הושלם';G.smart.done++;store.set('smart',G.smart);$('#sm-done').textContent=G.smart.done;addPts(30,'סיבוב חזרה חכמה הושלם');award('brain');confetti();return}
+  smCur=smDeck.shift();$('#sm-left').textContent='נשארו '+(smDeck.length+1);showCard($('#sm-card'),$('#sm-opts'),smCur,ok=>{if(!smOn)return;if(ok)addPts(1);else{smMiss++;wrong();smDeck.splice(Math.min(3,smDeck.length),0,smCur)}smNext()})}
+$('#sm-start').addEventListener('click',()=>{smOn=true;smMiss=0;smDeck=shuffle(FC);$('#sm-start').disabled=true;smNext()});
 
 /* ═══════ timeline + terms generator ═══════ */
 (function(){
@@ -1115,6 +1118,22 @@ $('#openreport').addEventListener('click',()=>{buildReport();$('#report').classL
 $('#closereport').addEventListener('click',()=>$('#report').classList.remove('open'));
 $('#report').addEventListener('click',e=>{if(e.target===$('#report'))$('#report').classList.remove('open')});
 $('#copyreport').addEventListener('click',()=>{const t=$('#reporttext');const done=()=>{$('#copyfb').textContent='הועתק! אפשר להדביק בוואטסאפ'};const fb=()=>{t.style.display='block';t.select();$('#copyfb').textContent='סמנו את הטקסט והעתיקו'};if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t.value).then(done).catch(fb);else fb()});
+
+/* ═══════ read-aloud: Web Speech API with the device's Hebrew voice ═══════ */
+const TTS={ok:'speechSynthesis' in window&&'SpeechSynthesisUtterance' in window,voice:null,cur:null,warned:false};
+function pickVoice(){if(!TTS.ok)return;const vs=speechSynthesis.getVoices();TTS.voice=vs.find(v=>/^he/i.test(v.lang)&&/Carmit|Google|Microsoft|Premium|Enhanced/i.test(v.name))||vs.find(v=>/^he/i.test(v.lang))||null}
+if(TTS.ok){pickVoice();speechSynthesis.addEventListener('voiceschanged',pickVoice)}
+function speak(text,btn){if(!TTS.ok){toast('הדפדפן הזה לא תומך בהקראה');return}
+  if(TTS.cur===btn){speechSynthesis.cancel();TTS.cur=null;btn.classList.remove('on');return}
+  speechSynthesis.cancel();$$('.spk.on').forEach(b=>b.classList.remove('on'));pickVoice();
+  const u=new SpeechSynthesisUtterance(text.replace(/🔊/g,'').replace(/\s+/g,' ').trim());u.lang='he-IL';if(TTS.voice)u.voice=TTS.voice;u.rate=0.95;
+  u.onend=u.onerror=()=>{btn.classList.remove('on');if(TTS.cur===btn)TTS.cur=null};TTS.cur=btn;btn.classList.add('on');speechSynthesis.speak(u);
+  if(!TTS.voice&&!TTS.warned){TTS.warned=true;toast('לא נמצא קול עברי במכשיר. בהגדרות: נגישות ← תוכן מדובר ← קולות ← עברית')}}
+const SPK_SEL='.lead,.def,.world,.quote,.q,.explain .txt,.card:not(.sorter):not(:has(#builder)):not(:has(#eumap)):not(:has(#sp-card)),.fc,#allynote,#front-note,.prob';
+function speakify(root){$$(SPK_SEL,root).concat(root&&root.matches&&root.matches(SPK_SEL)?[root]:[]).forEach(el=>{if(el.querySelector(':scope > .spk'))return;const b=document.createElement('button');b.type='button';b.className='spk';b.title='הקראה';b.setAttribute('aria-label','הקראה');b.textContent='🔊';b.addEventListener('click',e=>{e.stopPropagation();speak(el.innerText,b)});el.prepend(b)})}
+speakify(document);
+new MutationObserver(ms=>{ms.forEach(m=>m.addedNodes.forEach(n=>{if(n.nodeType!==1)return;speakify(n);const p=n.parentElement&&n.parentElement.closest(SPK_SEL);if(p)speakify(p)}))}).observe($('main'),{childList:true,subtree:true});
+$$('.tcard').forEach(t=>{const back=t.querySelector('.back');const b=document.createElement('button');b.type='button';b.className='spk';b.title='הקראה';b.textContent='🔊';b.addEventListener('click',e=>{e.stopPropagation();speak(t.querySelector('h4').innerText+'. '+back.innerText,b)});back.appendChild(b)});
 
 /* ═══════ theme toggle: auto → light → dark ═══════ */
 const THEMES=[['auto','🌓 תצוגה: אוטומטי'],['light','☀️ תצוגה: בהיר'],['dark','🌙 תצוגה: כהה']];
