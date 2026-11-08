@@ -246,6 +246,27 @@ summary .ico{font-size:20px}
 .spk.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
 .fc .spk{position:absolute;top:8px;left:8px;margin:0}
 .tcard .spk{float:none;display:inline-block;margin:6px 0 0;width:28px;height:28px;font-size:14px}
+/* 4-day plan */
+.plan{margin-top:16px}
+.plan h3{font-size:17px;margin-bottom:6px}
+.prow{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;padding:8px 6px;border-bottom:1px solid var(--rule);font-size:15px}
+.prow:last-child{border-bottom:0}
+.prow b{font-family:var(--display);min-width:170px}
+.prow .pst{margin-right:auto;color:var(--good);font-weight:700;font-family:var(--display);white-space:nowrap}
+.prow.now{background:var(--accent-soft);border-radius:6px}
+.prow.now b::after{content:" · היום";color:var(--accent)}
+.st-head .daytag{font-size:12px}
+/* progressive steps inside a station */
+.step{border:1px solid var(--rule);border-radius:8px;background:var(--panel);margin-top:10px;overflow:hidden;scroll-margin-top:150px}
+.stephead{width:100%;text-align:right;background:var(--bg);border:0;padding:10px 14px;font-family:var(--display);font-weight:700;font-size:15px;color:var(--ink);display:flex;gap:8px;align-items:center;cursor:pointer}
+.stephead .n{color:var(--accent);white-space:nowrap}
+.stephead .arr{margin-right:auto;color:var(--muted);transition:transform .2s}
+.step.open>.stephead{border-bottom:1px solid var(--rule)}
+.step.open>.stephead .arr{transform:rotate(90deg)}
+.step.done>.stephead .n{color:var(--good)}
+.stepbody{padding:12px;display:grid;gap:12px}
+.step:not(.open)>.stepbody{display:none}
+.stepnext{font-size:14px;color:var(--muted);padding:6px 14px 10px}
 .sprint-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;font-family:var(--display);font-weight:700}
 .sprint-top .timer{font-size:28px;color:var(--accent)}
 .sprint-top .timer.low{color:var(--bad)}
@@ -288,7 +309,8 @@ footer{padding-block:30px;color:var(--muted);font-size:14px;border-top:1px solid
 <main class="wrap">
 <header class="hero">
   <h1>מלחמת העולם הראשונה: הגורמים והאופי, <em>למבחן</em></h1>
-  <p>7 תחנות לפי הספר (עמ׳ 46–62). בכל תחנה: הסבר של דקה, הגדרה שכותבים במבחן, משחק או הדגמה, סרטון קצר, ובסוף <b>בוס</b>: 3 שאלות שפותחות את התחנה הבאה. בסוף: ציר זמן, מבחן של 15 שאלות וספרינט.</p>
+  <p>7 תחנות לפי הספר (עמ׳ 46–62), מחולקות ל-4 ימים עד המבחן. כל תחנה נפתחת <b>שלב אחרי שלב</b>: לוחצים על שלב, לומדים אותו, ורק אז מופיע הבא. בסוף כל תחנה <b>בוס</b> של 3 שאלות שפותח את התחנה הבאה.</p>
+  <div class="card plan" id="plan"></div>
   <div class="howto">
     <div><b>1. קראו</b> את ההסבר וההגדרה הצבועה.</div>
     <div><b>2. שחקו</b> במיון או בהדגמה. זה מה שנשאר בראש.</div>
@@ -1034,7 +1056,7 @@ function renderBoss(key){const el=$(`[data-boss="${key}"]`),b=BOSS[key],saved=G.
   updBossLock(key)}
 STATIONS.forEach(renderBoss);
 function applyLocks(){STATIONS.forEach(k=>{$(`section[data-st="${k}"]`).classList.toggle('locked',!G.unlocked[k])});renderNav()}
-function renderNav(){STATIONS.forEach(k=>{const a=$(`#navchips a[data-st="${k}"]`);a.classList.toggle('done',!!G.boss[k]);a.classList.toggle('lock',!G.unlocked[k]);a.textContent=(G.boss[k]?'✔ ':(G.unlocked[k]?'':'🔒 '))+(STATIONS.indexOf(k)+1)+' '+STNAMES[k]})}
+function renderNav(){STATIONS.forEach(k=>{const a=$(`#navchips a[data-st="${k}"]`);a.classList.toggle('done',!!G.boss[k]);a.classList.toggle('lock',!G.unlocked[k]);a.textContent=(G.boss[k]?'✔ ':(G.unlocked[k]?'':'🔒 '))+(STATIONS.indexOf(k)+1)+' '+STNAMES[k]});renderPlan()}
 $$('[data-unlock]').forEach(b=>b.addEventListener('click',()=>{const k=b.closest('section').dataset.st;G.unlocked[k]=true;store.set('unlocked',G.unlocked);applyLocks()}));
 applyLocks();
 
@@ -1134,6 +1156,37 @@ function speakify(root){$$(SPK_SEL,root).concat(root&&root.matches&&root.matches
 speakify(document);
 new MutationObserver(ms=>{ms.forEach(m=>m.addedNodes.forEach(n=>{if(n.nodeType!==1)return;speakify(n);const p=n.parentElement&&n.parentElement.closest(SPK_SEL);if(p)speakify(p)}))}).observe($('main'),{childList:true,subtree:true});
 $$('.tcard').forEach(t=>{const back=t.querySelector('.back');const b=document.createElement('button');b.type='button';b.className='spk';b.title='הקראה';b.textContent='🔊';b.addEventListener('click',e=>{e.stopPropagation();speak(t.querySelector('h4').innerText+'. '+back.innerText,b)});back.appendChild(b)});
+
+/* ═══════ 4-day plan (exam Wed 11.11) ═══════ */
+var DAYS=[
+ {d:'יום 1',date:'ראשון 8.11',iso:'2026-11-08',st:['blocs','national'],extra:''},
+ {d:'יום 2',date:'שני 9.11',iso:'2026-11-09',st:['arms','spark','fronts'],extra:''},
+ {d:'יום 3',date:'שלישי 10.11',iso:'2026-11-10',st:['usa','total'],extra:'ציר זמן + מבחן 15 שאלות'},
+ {d:'יום 4',date:'רביעי 11.11, בוקר המבחן',iso:'2026-11-11',st:[],extra:'ספרינט + חזרה חכמה + "נושאים לחזור עליהם" מהדוח'}
+];
+var DAYOF={};DAYS.forEach((d,i)=>d.st.forEach(s=>DAYOF[s]=i+1));
+function renderPlan(){const el=$('#plan');if(!el||!DAYS)return;const now=new Date();const iso=now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0')+'-'+String(now.getDate()).padStart(2,'0');const lastQuiz=store.get('lastQuiz',null);
+  el.innerHTML='<h3>🗓️ המסלול עד המבחן</h3>'+DAYS.map((d,i)=>{const done=d.st.filter(s=>G.boss[s]).length;let st='';
+    if(d.st.length)st=done+'/'+d.st.length+' בוסים'+(done===d.st.length?' ✔':'');
+    if(i===2)st+=(lastQuiz!=null?' · מבחן '+lastQuiz+'/15':'');if(i===3)st=G.sprint.runs?G.sprint.runs+' ספרינטים · שיא '+G.sprint.best:'';
+    const what=(d.st.length?'תחנות '+d.st.map(s=>STATIONS.indexOf(s)+1).join(', ')+': '+d.st.map(s=>STNAMES[s]).join(', '):'')+(d.extra?(d.st.length?' + ':'')+d.extra:'');
+    return `<div class="prow${d.iso===iso?' now':''}"><b>${d.d} · ${d.date}</b><span>${what}</span><span class="pst">${st}</span></div>`}).join('')+'<p style="margin-top:8px;font-size:14px;color:var(--muted)">כ-40 דקות ביום. אם יום אחד התפספס, פשוט ממשיכים מהתחנה הבאה שפתוחה.</p>'}
+STATIONS.forEach(k=>{const h=$(`section[data-st="${k}"] .st-head .num`);if(h&&DAYOF[k])h.insertAdjacentHTML('afterend',`<span class="tag chem daytag">יום ${DAYOF[k]}</span>`)});
+renderPlan();
+
+/* ═══════ progressive steps: a station opens one step at a time ═══════ */
+const STEPS=store.get('steps',{});
+function stepTitle(g){const f=g[0];if(f.matches('.minih'))return f.textContent.trim();if(f.matches('.lead,.def'))return 'ההסבר וההגדרה';if(f.matches('.boss'))return 'הבוס: 3 שאלות';if(f.matches('.demo'))return 'הדגמה';if(f.matches('.types'))return 'כרטיסים';const h=f.querySelector('h3,h4,.minih');if(f.matches('.two')){const hs=[...f.querySelectorAll('h3')].map(x=>x.textContent.trim().split(':')[0]);return hs.join(' מול ')}return h?h.textContent.trim():'המשך'}
+function buildSteps(sec){const key=sec.dataset.st,body=sec.querySelector('.st-body');const groups=[];let cur=null;
+  [...body.children].forEach(el=>{if(el.matches('.sp')){el.remove();return}const lastIsHead=cur&&cur.length&&cur[cur.length-1].matches('.minih');const brk=el.matches('.minih,.boss')||(el.matches('.two,.demo,.types,.card')&&!lastIsHead);if(!cur||(brk&&cur.length)){cur=[];groups.push(cur)}cur.push(el)});
+  const n=groups.length;let opened=Math.min(STEPS[key]||0,n);
+  const wraps=groups.map((g,i)=>{const w=document.createElement('div');w.className='step';w.dataset.i=i+1;const hd=document.createElement('button');hd.type='button';hd.className='stephead';hd.innerHTML=`<span class="n">שלב ${i+1}/${n}</span><span>${stepTitle(g)}</span><span class="arr">▶</span>`;const bd=document.createElement('div');bd.className='stepbody';g.forEach(el=>bd.appendChild(el));w.appendChild(hd);w.appendChild(bd);body.appendChild(w);
+    hd.addEventListener('click',()=>{const i1=i+1;if(i1>opened){opened=i1;STEPS[key]=opened;store.set('steps',STEPS);w.classList.add('open');if(i1===1)addPts(2,'התחלתם תחנה');paint();setTimeout(()=>w.scrollIntoView({behavior:'smooth',block:'start'}),60)}else w.classList.toggle('open')});return w});
+  function paint(){wraps.forEach((w,i)=>{const i1=i+1;w.hidden=i1>opened+1;w.classList.toggle('done',i1<=opened&&i1<opened);});
+    wraps.forEach((w,i)=>{const i1=i+1;if(i1<=opened&&!w.dataset.init){w.dataset.init=1;w.classList.toggle('open',i1===opened)}});
+    const hint=body.querySelector('.stepnext');if(hint)hint.remove();if(opened<n){const p=document.createElement('p');p.className='stepnext';p.textContent=opened?'סיימתם? לחצו על השלב הבא כשאתם מוכנים.':'לחצו על שלב 1 כדי להתחיל. השלבים הבאים יופיעו אחד-אחד.';body.appendChild(p)}}
+  paint()}
+STATIONS.forEach(k=>buildSteps($(`section[data-st="${k}"]`)));
 
 /* ═══════ theme toggle: auto → light → dark ═══════ */
 const THEMES=[['auto','🌓 תצוגה: אוטומטי'],['light','☀️ תצוגה: בהיר'],['dark','🌙 תצוגה: כהה']];
