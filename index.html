@@ -289,6 +289,9 @@ summary .ico{font-size:20px}
 .modal.open{display:flex}
 .modal .box{background:var(--panel);color:var(--ink);border-radius:12px;max-width:640px;width:100%;padding:20px;box-shadow:var(--shadow);animation:pop .3s}
 .modal .box h2{font-size:24px}
+.resetrow{margin-top:18px;padding-top:12px;border-top:1px dashed var(--rule);display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
+.resetrow span{font-size:13px;color:var(--muted)}
+.resetrow .btn.danger{background:#c0392b;color:#fff;border-color:#c0392b}
 .modal .row{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid var(--rule);font-size:16px;flex-wrap:wrap}
 .modal .row b{font-family:var(--display)}
 footer{padding-block:30px;color:var(--muted);font-size:14px;border-top:1px solid var(--rule);margin-top:20px}
@@ -720,6 +723,7 @@ footer{padding-block:30px;color:var(--muted);font-size:14px;border-top:1px solid
   <div id="reportbody" style="margin-top:10px"></div>
   <div class="ctrls" style="margin-top:14px"><button class="btn" id="copyreport">📋 העתק כטקסט (לשלוח להורה)</button><span id="copyfb" style="font-size:14px;color:var(--muted)"></span></div>
   <textarea id="reporttext" style="width:100%;margin-top:10px;font:inherit;font-size:14px;min-height:120px;display:none;background:var(--bg);color:var(--ink);border:1px solid var(--rule);border-radius:6px;padding:8px" aria-label="טקסט הדוח"></textarea>
+  <div class="resetrow"><button class="btn ghost" id="resetall">🔄 להתחיל את כל הלימוד מהתחלה</button><span id="resetfb">מוחק נקודות, תחנות, תגים ושלבים שנפתחו. התצוגה (בהיר/כהה) נשמרת.</span></div>
 </div></div>
 
 <script>
@@ -1138,6 +1142,15 @@ function buildReport(){const passed=STATIONS.filter(k=>G.boss[k]);const lastQuiz
   $('#reporttext').value='דוח לימוד: מלחמת העולם הראשונה · '+new Date().toLocaleDateString('he-IL')+'\n'+rows.map(r=>r[0]+': '+r[1]).join('\n')}
 $('#openreport').addEventListener('click',()=>{buildReport();$('#report').classList.add('open')});
 $('#closereport').addEventListener('click',()=>$('#report').classList.remove('open'));
+/* reset everything: two taps, 6-second window, theme kept */
+(function(){const b=$('#resetall'),fb=$('#resetfb'),idle=fb.textContent;let armed=null;
+  const disarm=()=>{armed=null;b.textContent='🔄 להתחיל את כל הלימוד מהתחלה';b.classList.remove('danger');fb.textContent=idle};
+  b.addEventListener('click',()=>{
+    if(!armed){armed=setTimeout(disarm,6000);b.textContent='⚠️ בטוח? לחצו שוב למחיקה';b.classList.add('danger');fb.textContent='כל ההתקדמות ('+G.pts+' נק׳, '+Object.keys(G.badges).length+' תגים) תימחק ואין דרך לשחזר.';return}
+    clearTimeout(armed);
+    try{const keep=localStorage.getItem('ww1.theme');Object.keys(localStorage).filter(k=>k.startsWith('ww1.')).forEach(k=>localStorage.removeItem(k));if(keep!=null)localStorage.setItem('ww1.theme',keep)}catch(e){}
+    b.disabled=true;b.textContent='מתחילים מחדש…';location.replace(location.pathname+location.search)});
+})();
 $('#report').addEventListener('click',e=>{if(e.target===$('#report'))$('#report').classList.remove('open')});
 $('#copyreport').addEventListener('click',()=>{const t=$('#reporttext');const done=()=>{$('#copyfb').textContent='הועתק! אפשר להדביק בוואטסאפ'};const fb=()=>{t.style.display='block';t.select();$('#copyfb').textContent='סמנו את הטקסט והעתיקו'};if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t.value).then(done).catch(fb);else fb()});
 
