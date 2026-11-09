@@ -289,6 +289,57 @@ summary .ico{font-size:20px}
 .modal.open{display:flex}
 .modal .box{background:var(--panel);color:var(--ink);border-radius:12px;max-width:640px;width:100%;padding:20px;box-shadow:var(--shadow);animation:pop .3s}
 .modal .box h2{font-size:24px}
+/* v5: open questions · warm-up · confidence · comparison table · cause→effect */
+.oq-q{font-size:18px;font-weight:700;margin-top:8px}
+.oq-tip{font-size:15px;color:var(--muted);margin-top:6px}
+.oq-live{min-height:60px;border:1px dashed var(--rule);border-radius:8px;padding:10px 12px;font-size:16px;background:var(--bg);margin-top:10px;line-height:1.5}
+.oq-live.on{border-color:var(--accent);border-style:solid;box-shadow:0 0 0 3px var(--accent-soft)}
+.oq-live .interim{color:var(--muted)}
+.btn.mic{background:var(--heat);color:#fff}
+.btn.mic.on{animation:micpulse 1.2s infinite}
+@keyframes micpulse{0%,100%{box-shadow:0 0 0 0 var(--heat-soft)}50%{box-shadow:0 0 0 8px transparent}}
+.rubric{display:grid;gap:6px}
+.rubric label{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border:1px solid var(--rule);border-radius:6px;font-size:15px;background:var(--bg);cursor:pointer}
+.rubric label.auto{border-color:var(--good);background:var(--chem-soft)}
+.rubric label em{font-style:normal;font-size:12px;color:var(--good);font-weight:700;white-space:nowrap}
+.rubric input{width:20px;height:20px;accent-color:var(--good);flex:none;margin-top:2px}
+.oq-model{margin-top:10px;border-right:4px solid var(--good);background:var(--chem-soft);font-size:15px}
+.oq-model summary{font-size:15px}
+.oq-model div{margin-top:6px;line-height:1.55}
+.conf{display:flex;gap:6px;align-items:center;flex-wrap:wrap;font-size:13px;color:var(--muted);margin:4px 0 8px;transition:transform .15s}
+.conf button{border:1px solid var(--rule);background:var(--bg);color:var(--ink);border-radius:999px;padding:3px 10px;font-size:13px}
+.conf button.sel{border-color:var(--accent);background:var(--accent-soft);font-weight:700}
+.conf.nudge{transform:scale(1.06);color:var(--bad)}
+.conf.nudge button{border-color:var(--bad)}
+.warm{margin-top:12px;border:2px solid var(--gold)}
+.warm h3{font-size:17px}
+.warm .q{margin-top:10px}
+.wdone{margin-top:10px;padding:12px;border-radius:8px;border:1px solid var(--good);background:var(--chem-soft);font-weight:700;animation:slidein .4s}
+.cmp-pool{display:flex;flex-wrap:wrap;gap:8px;min-height:44px;padding:8px;border:1px dashed var(--rule);border-radius:6px;margin-top:10px}
+.cmp-pool .chip{white-space:normal;text-align:right;border-radius:8px;font-size:14px;line-height:1.35}
+.cmp-pool .chip.sel{border-color:var(--accent);background:var(--accent-soft)}
+.cmp-pool .chip.err{border-color:var(--bad);background:var(--heat-soft)}
+.cmp{display:grid;gap:8px;margin-top:10px}
+.cmp .row{border:1px solid var(--rule);border-radius:8px;padding:8px 10px;background:var(--panel)}
+.cmp .row.head{border:0;background:transparent;padding:0 10px}
+.cmp .row h5{font-size:15px;margin-bottom:6px;color:var(--accent);font-family:var(--display)}
+.cmp .cells{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.cmp .hd{font-size:13px;font-weight:700;color:var(--muted);text-align:center}
+.cmp .hd.now{color:var(--accent)}
+.cmp .cell{min-height:46px;border:2px dashed var(--rule);border-radius:6px;padding:6px 8px;font-size:14px;text-align:right;color:var(--ink);background:var(--bg);line-height:1.35}
+.cmp .cell.now{border-color:var(--accent-soft)}
+.cmp .cell:not(.filled):hover{border-color:var(--accent)}
+.cmp .cell.filled{border-style:solid;border-color:var(--good);background:var(--chem-soft);cursor:default}
+.cmp .cell.shake{animation:shake .4s}
+@keyframes shake{0%,100%{transform:none}25%{transform:translateX(5px)}75%{transform:translateX(-5px)}}
+.links{display:grid;gap:6px;margin-top:10px}
+.links .node{border:2px solid var(--rule);border-radius:8px;padding:8px 12px;background:var(--panel);font-weight:700;font-size:15px;animation:slidein .3s}
+.links .link{border-right:3px solid var(--accent);margin-right:18px;padding:6px 12px;font-size:15px;color:var(--muted)}
+.links .link.done{color:var(--ink)}
+.links .link.done b{color:var(--accent)}
+.links .link .q{margin-top:4px}
+.whybtn{background:var(--accent-soft);color:var(--accent);border:1px solid var(--accent);border-radius:999px;padding:4px 12px;font-weight:700;font-size:14px}
+.modal .row.spoken span{font-size:14px;color:var(--muted);flex-basis:100%}
 .resetrow{margin-top:18px;padding-top:12px;border-top:1px dashed var(--rule);display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
 .resetrow span{font-size:13px;color:var(--muted)}
 .resetrow .btn.danger{background:#c0392b;color:#fff;border-color:#c0392b}
@@ -314,11 +365,12 @@ footer{padding-block:30px;color:var(--muted);font-size:14px;border-top:1px solid
   <h1>מלחמת העולם הראשונה: הגורמים והאופי, <em>למבחן</em></h1>
   <p>7 תחנות לפי הספר (עמ׳ 46–62), מחולקות ל-4 ימים עד המבחן. כל תחנה נפתחת <b>שלב אחרי שלב</b>: לוחצים על שלב, לומדים אותו, ורק אז מופיע הבא. בסוף כל תחנה <b>בוס</b> של 3 שאלות שפותח את התחנה הבאה.</p>
   <div class="card plan" id="plan"></div>
+  <div class="card warm" id="warm" hidden></div>
   <div class="howto">
     <div><b>1. קראו</b> את ההסבר וההגדרה הצבועה.</div>
     <div><b>2. שחקו</b> במיון או בהדגמה. זה מה שנשאר בראש.</div>
     <div><b>3. צפו</b> בסרטון אחד לפחות וענו על 2 שאלות עליו. זה מה שפותח את הבוס.</div>
-    <div><b>4. נצחו את הבוס</b> ואז הסבירו להורה.</div>
+    <div><b>4. ענו בקול</b> על שאלה פתוחה כמו במבחן, ואז <b>נצחו את הבוס</b> והסבירו להורה.</div>
   </div>
   <div class="rules"><span>✅ תשובה נכונה: +10</span><span>👑 בוס: +5 לשאלה, +20 על 3/3</span><span>🔥 רצף של 5: בונוס</span><span>🏅 תג: +25</span><span>❌ טעות לא מורידה נקודות</span></div>
 </header>
@@ -360,6 +412,7 @@ footer{padding-block:30px;color:var(--muted);font-size:14px;border-top:1px solid
   <div class="sp"></div>
   <div class="minih">סרטונים קצרים</div>
   <div class="vids" data-vids="blocs"></div>
+  <div class="card openq" data-open="blocs"><h3>🎤 שאלה פתוחה, כמו במבחן</h3><div class="oq-body"></div></div>
   <div class="boss" data-boss="blocs"></div>
   </div>
 </section>
@@ -413,6 +466,7 @@ footer{padding-block:30px;color:var(--muted);font-size:14px;border-top:1px solid
   <div class="sp"></div>
   <div class="minih">סרטונים קצרים</div>
   <div class="vids" data-vids="national"></div>
+  <div class="card openq" data-open="national"><h3>🎤 שאלה פתוחה, כמו במבחן</h3><div class="oq-body"></div></div>
   <div class="boss" data-boss="national"></div>
   </div>
 </section>
@@ -477,6 +531,7 @@ footer{padding-block:30px;color:var(--muted);font-size:14px;border-top:1px solid
   <div class="sp"></div>
   <div class="minih">סרטונים קצרים</div>
   <div class="vids" data-vids="arms"></div>
+  <div class="card openq" data-open="arms"><h3>🎤 שאלה פתוחה, כמו במבחן</h3><div class="oq-body"></div></div>
   <div class="boss" data-boss="arms"></div>
   </div>
 </section>
@@ -493,6 +548,10 @@ footer{padding-block:30px;color:var(--muted);font-size:14px;border-top:1px solid
     <h3>תרגול: סדרו את שרשרת האירועים</h3>
     <p style="margin-top:6px">לחצו על האירועים לפי הסדר הנכון. זו בדיוק התשובה לשאלה "הסבירו כיצד רצח אחד הפך למלחמת עולם".</p>
     <div id="builder" style="margin-top:10px"></div>
+  </div>
+  <div class="card game" id="whychain">
+    <h3>🔗 למה זה הוביל לזה? סיבה ← תוצאה, ואז "מה אם"</h3>
+    <div id="why-game"></div>
   </div>
   <div class="sp"></div>
   <div class="card">
@@ -540,6 +599,7 @@ footer{padding-block:30px;color:var(--muted);font-size:14px;border-top:1px solid
   <div class="sp"></div>
   <div class="minih">סרטונים קצרים</div>
   <div class="vids" data-vids="spark"></div>
+  <div class="card openq" data-open="spark"><h3>🎤 שאלה פתוחה, כמו במבחן</h3><div class="oq-body"></div></div>
   <div class="boss" data-boss="spark"></div>
   </div>
 </section>
@@ -580,6 +640,7 @@ footer{padding-block:30px;color:var(--muted);font-size:14px;border-top:1px solid
   <div class="sp"></div>
   <div class="minih">סרטונים קצרים</div>
   <div class="vids" data-vids="fronts"></div>
+  <div class="card openq" data-open="fronts"><h3>🎤 שאלה פתוחה, כמו במבחן</h3><div class="oq-body"></div></div>
   <div class="boss" data-boss="fronts"></div>
   </div>
 </section>
@@ -620,6 +681,7 @@ footer{padding-block:30px;color:var(--muted);font-size:14px;border-top:1px solid
   <div class="sp"></div>
   <div class="minih">סרטונים קצרים</div>
   <div class="vids" data-vids="usa"></div>
+  <div class="card openq" data-open="usa"><h3>🎤 שאלה פתוחה, כמו במבחן</h3><div class="oq-body"></div></div>
   <div class="boss" data-boss="usa"></div>
   </div>
 </section>
@@ -637,6 +699,10 @@ footer{padding-block:30px;color:var(--muted);font-size:14px;border-top:1px solid
   <div class="sp"></div>
   <div class="minih">כלי נשק חדשים (עמ׳ 61)</div>
   <div class="types" id="weapons-grid"></div>
+  <div class="card game" id="newwar">
+    <h3>🆕 מה היה חדש במלחמה הזו? (הייחודיות)</h3>
+    <div id="newwar-game"></div>
+  </div>
   <div class="world"><h4>🌍 ומה היום? (הקבלה בלבד)</h4><ul>
     <li>דומה ל"<b>העורף הוא חזית</b>": מילואים, מפעלים שעוברים לייצור ביטחוני, ותעמולה ברשתות. ב-1914–1918 קראו לזה בפעם הראשונה מלחמה טוטלית.</li>
   </ul></div>
@@ -654,6 +720,7 @@ footer{padding-block:30px;color:var(--muted);font-size:14px;border-top:1px solid
   <div class="sp"></div>
   <div class="minih">סרטונים קצרים</div>
   <div class="vids" data-vids="total"></div>
+  <div class="card openq" data-open="total"><h3>🎤 שאלה פתוחה, כמו במבחן</h3><div class="oq-body"></div></div>
   <div class="boss" data-boss="total"></div>
   </div>
 </section>
@@ -696,7 +763,7 @@ footer{padding-block:30px;color:var(--muted);font-size:14px;border-top:1px solid
     </div>
     <div class="card">
       <div class="sprint-top"><span>🧠 חזרה חכמה</span><span id="sm-left" style="color:var(--muted);font-size:14px"></span></div>
-      <p style="margin-top:6px;font-size:15px;color:var(--muted)">בלי שעון. כל כרטיסייה היא שאלה עם 3 תשובות. טעות מחזירה אותה לערימה, ומסיימים רק כשכל הכרטיסיות נענו נכון.</p>
+      <p style="margin-top:6px;font-size:15px;color:var(--muted)">בלי שעון. כל כרטיסייה היא שאלה עם 3 תשובות, ולפני כל תשובה מסמנים "בטוח / לא בטוח". טעות מחזירה אותה לערימה (טעות בביטחון מלא: פעמיים), ומסיימים רק כשכל הכרטיסיות נענו נכון.</p>
       <div class="sp"></div>
       <div class="fc" id="sm-card"><div><div class="fq">לחצו "התחל" ⬇</div></div></div>
       <div class="fcopts" id="sm-opts"></div>
@@ -713,7 +780,7 @@ footer{padding-block:30px;color:var(--muted);font-size:14px;border-top:1px solid
 </section>
 
 <footer>
-  <p>כל הסרטונים בעברית ונפתחים ביוטיוב בחלון חדש. אחרי חצי מאורך הסרטון נפתחות 2 שאלות עליו; תשובה נכונה על סרטון אחד לפחות פותחת את הבוס של התחנה.</p>
+  <p>השאלות הפתוחות נענות בקול: הדפדפן מתמלל (צריך לאשר מיקרופון פעם אחת), ואתם מסמנים אילו נקודות חובה אמרתם. כל הסרטונים בעברית ונפתחים ביוטיוב בחלון חדש. אחרי חצי מאורך הסרטון נפתחות 2 שאלות עליו; תשובה נכונה על סרטון אחד לפחות פותחת את הבוס של התחנה.</p>
   <p style="margin-top:6px">הנקודות, התגים וההתקדמות נשמרים רק בדפדפן הזה. "הדוח שלי" למעלה מסכם הכול להורה. החומר לפי הספר, עמ׳ 46–62: אם במחברת כתוב אחרת, לכו לפי המחברת.</p>
 </footer>
 </main>
@@ -1044,11 +1111,11 @@ function refreshBossLocks(){STATIONS.forEach(updBossLock)}
 function renderBoss(key){const el=$(`[data-boss="${key}"]`),b=BOSS[key],saved=G.boss[key],tries=G.tries[key]||0;
   el.innerHTML=`<div class="bh"><span class="ico">👑</span><h3>בוס ${STATIONS.indexOf(key)+1}: 3 שאלות</h3><span class="bst">${saved?('ניצחתם '+saved.score+'/3'+(saved.tries>1?' (ניסיון '+saved.tries+')':'')):(tries?'ניסיון '+(tries+1)+'. ':'')+'2/3 ומעלה פותח את התחנה הבאה'}</span></div><div class="stack" id="bq-${key}"></div><div class="ctrls" style="margin-top:12px"><button class="btn" id="bsub-${key}" disabled data-picks="0">הגישו תשובות</button></div><div class="feedback" id="bvl-${key}"></div><div id="bres-${key}"></div><div class="explain"><span style="font-size:22px">🗣️</span><div class="txt"><b>עכשיו תסבירו להורה:</b> ${b.explain}</div><label><input type="checkbox" data-explain="${key}" ${G.explained[key]?'checked disabled':''}> הסברתי</label></div>`;
   const list=$('#bq-'+key),sub=$('#bsub-'+key),res=$('#bres-'+key);const picks={};
-  b.q.forEach((q,i)=>{const ord=tries>0?shuffle([0,1,2,3]):[0,1,2,3];const d=document.createElement('div');d.className='q';d.innerHTML=`<div class="qt">${i+1}. ${q.q}</div><div class="opts">${ord.map(j=>`<button type="button" class="opt" data-j="${j}">${q.o[j]}</button>`).join('')}</div><div class="why"></div>`;list.appendChild(d);
-    d.querySelectorAll('.opt').forEach(o=>o.addEventListener('click',()=>{if(d.dataset.locked)return;d.querySelectorAll('.opt').forEach(x=>x.classList.remove('pick'));o.classList.add('pick');picks[i]=+o.dataset.j;sub.dataset.picks=Object.keys(picks).length;updBossLock(key)}))});
-  if(saved){list.querySelectorAll('.q').forEach((d,i)=>{d.dataset.locked=1;d.querySelectorAll('.opt').forEach(o=>{o.disabled=true;if(+o.dataset.j===b.q[i].a)o.classList.add('right')})});sub.hidden=true;el.classList.add('passed');markDone(key)}
+  b.q.forEach((q,i)=>{const ord=tries>0?shuffle([0,1,2,3]):[0,1,2,3];const d=document.createElement('div');d.className='q';d.innerHTML=`<div class="qt">${i+1}. ${q.q}</div><div class="opts">${ord.map(j=>`<button type="button" class="opt" data-j="${j}">${q.o[j]}</button>`).join('')}</div><div class="why"></div>`;list.appendChild(d);d.querySelector('.opts').before(confRow());
+    d.querySelectorAll('.opt').forEach(o=>o.addEventListener('click',()=>{if(d.dataset.locked||needConf(d.querySelector('.conf')))return;d.querySelectorAll('.opt').forEach(x=>x.classList.remove('pick'));o.classList.add('pick');picks[i]=+o.dataset.j;sub.dataset.picks=Object.keys(picks).length;updBossLock(key)}))});
+  if(saved){list.querySelectorAll('.q').forEach((d,i)=>{d.dataset.locked=1;d.querySelector('.conf').remove();d.querySelectorAll('.opt').forEach(o=>{o.disabled=true;if(+o.dataset.j===b.q[i].a)o.classList.add('right')})});sub.hidden=true;el.classList.add('passed');markDone(key)}
   sub.addEventListener('click',()=>{if(!stationVideoOK(key))return;let score=0;const thisTry=tries+1;G.tries[key]=thisTry;store.set('tries',G.tries);const pass0=Object.keys(picks).filter(i=>picks[i]===b.q[i].a).length>=2;
-    list.querySelectorAll('.q').forEach((d,i)=>{d.dataset.locked=1;const ok=picks[i]===b.q[i].a;if(ok)score++;d.querySelectorAll('.opt').forEach(o=>{o.disabled=true;const j=+o.dataset.j;o.classList.remove('pick');if(pass0&&j===b.q[i].a)o.classList.add('right');else if(j===picks[i])o.classList.add(ok?'right':'wrong')});d.querySelector('.why').textContent=ok?'נכון!':(pass0?'לא נכון. התשובה הנכונה מסומנת בירוק.':'לא נכון. חזרו להסבר בתחנה ונסו שוב (האפשרויות יתערבבו).');if(ok)correct('בוס: תשובה נכונה');else{wrong();G.wrongTopics[key]=(G.wrongTopics[key]||0)+1;store.set('wrongTopics',G.wrongTopics)}});
+    list.querySelectorAll('.q').forEach((d,i)=>{d.dataset.locked=1;const ok=picks[i]===b.q[i].a;if(ok)score++;const sure=confOf(d.querySelector('.conf'));confLog(sure,ok);d.querySelector('.conf').remove();d.querySelectorAll('.opt').forEach(o=>{o.disabled=true;const j=+o.dataset.j;o.classList.remove('pick');if(pass0&&j===b.q[i].a)o.classList.add('right');else if(j===picks[i])o.classList.add(ok?'right':'wrong')});d.querySelector('.why').textContent=(ok?'נכון!':(pass0?'לא נכון. התשובה הנכונה מסומנת בירוק.':'לא נכון. חזרו להסבר בתחנה ונסו שוב (האפשרויות יתערבבו).'))+(!ok&&sure?' '+SURE_WRONG:'');if(ok)correct('בוס: תשובה נכונה');else{wrong();G.wrongTopics[key]=(G.wrongTopics[key]||0)+(sure?2:1);store.set('wrongTopics',G.wrongTopics)}});
     sub.hidden=true;$('#bvl-'+key).textContent='';const pass=score>=2;
     if(pass){G.boss[key]={score,tries:thisTry};store.set('boss',G.boss);el.classList.add('passed');markDone(key);const idx=STATIONS.indexOf(key);if(idx<STATIONS.length-1){G.unlocked[STATIONS[idx+1]]=true;store.set('unlocked',G.unlocked);applyLocks()}
       addPts(score*5,'ניצחון על הבוס');if(score===3){addPts(20,'בוס מושלם 3/3');if(thisTry===1)award('perfect')}award('st_'+key);confetti();
@@ -1098,8 +1165,8 @@ const FC=[
 ];
 /* every card is a question with 3 answers (the right one + 2 answers of other cards); a miss re-queues the card */
 function fcOptions(c){const others=shuffle(FC.filter(x=>x!==c&&x[1]!==c[1])).slice(0,2).map(x=>x[1]);return shuffle([c[1],...others])}
-function showCard(cardEl,optsEl,c,onAnswer){cardEl.innerHTML=`<div><div class="fq">${c[0]}<small>בחרו את התשובה הנכונה</small></div></div>`;speakify(cardEl);optsEl.innerHTML='';delete optsEl.dataset.locked;
-  fcOptions(c).forEach(o=>{const b=document.createElement('button');b.type='button';b.className='opt';b.textContent=o;b.addEventListener('click',()=>{if(optsEl.dataset.locked)return;optsEl.dataset.locked=1;const ok=o===c[1];b.classList.add(ok?'right':'wrong');[...optsEl.children].forEach(x=>{x.disabled=true;if(!ok&&x.textContent===c[1])x.classList.add('right')});setTimeout(()=>onAnswer(ok),ok?350:1600)});optsEl.appendChild(b)})}
+function showCard(cardEl,optsEl,c,onAnswer,withConf){cardEl.innerHTML=`<div><div class="fq">${c[0]}<small>בחרו את התשובה הנכונה</small></div></div>`;speakify(cardEl);optsEl.innerHTML='';delete optsEl.dataset.locked;const cr=withConf?confRow():null;if(cr)optsEl.appendChild(cr);
+  fcOptions(c).forEach(o=>{const b=document.createElement('button');b.type='button';b.className='opt';b.textContent=o;b.addEventListener('click',()=>{if(optsEl.dataset.locked||(cr&&needConf(cr)))return;optsEl.dataset.locked=1;const ok=o===c[1];const sure=cr?confOf(cr):null;confLog(sure,ok);if(cr)cr.remove();b.classList.add(ok?'right':'wrong');[...optsEl.children].forEach(x=>{x.disabled=true;if(!ok&&x.textContent===c[1])x.classList.add('right')});setTimeout(()=>onAnswer(ok,sure),ok?350:1600)});optsEl.appendChild(b)})}
 let spDeck=[],spScore=0,spT=null,spLeft=60,spOn=false,spCur=null;
 $('#sp-best').textContent=G.sprint.best;$('#sp-runs').textContent=G.sprint.runs;$('#sm-left').textContent=FC.length+' כרטיסיות';
 function spNext(){if(!spOn)return;if(!spDeck.length)spDeck=shuffle(FC);spCur=spDeck.shift();showCard($('#sp-card'),$('#sp-opts'),spCur,ok=>{if(!spOn)return;if(ok){spScore++;$('#sp-score').textContent=spScore}else spDeck.splice(Math.min(4,spDeck.length),0,spCur);spNext()})}
@@ -1107,7 +1174,7 @@ function spEnd(){spOn=false;clearInterval(spT);$('#sp-opts').innerHTML='';$('#sp
 $('#sp-start').addEventListener('click',()=>{spOn=true;spScore=0;spLeft=60;spDeck=shuffle(FC);$('#sp-score').textContent=0;$('#sp-timer').textContent=60;$('#sp-timer').classList.remove('low');$('#sp-start').disabled=true;spNext();clearInterval(spT);spT=setInterval(()=>{spLeft--;$('#sp-timer').textContent=spLeft;if(spLeft<=10)$('#sp-timer').classList.add('low');if(spLeft<=0)spEnd()},1000)});
 let smDeck=[],smOn=false,smCur=null,smMiss=0;$('#sm-done').textContent=G.smart.done;
 function smNext(){if(!smDeck.length){smOn=false;$('#sm-opts').innerHTML='';$('#sm-start').disabled=false;$('#sm-start').textContent='▶ עוד סיבוב';$('#sm-card').innerHTML='<div><div class="fq">🧠 הערימה ריקה: עניתם נכון על כל '+FC.length+' הכרטיסיות'+(smMiss?'<small>'+smMiss+' טעויות חזרו אליכם בדרך. סיבוב נוסף מחר יקבע את זה בזיכרון</small>':'<small>בלי אף טעות!</small>')+'</div></div>';$('#sm-left').textContent='הושלם';G.smart.done++;store.set('smart',G.smart);$('#sm-done').textContent=G.smart.done;addPts(30,'סיבוב חזרה חכמה הושלם');award('brain');confetti();return}
-  smCur=smDeck.shift();$('#sm-left').textContent='נשארו '+(smDeck.length+1);showCard($('#sm-card'),$('#sm-opts'),smCur,ok=>{if(!smOn)return;if(ok)addPts(1);else{smMiss++;wrong();smDeck.splice(Math.min(3,smDeck.length),0,smCur)}smNext()})}
+  smCur=smDeck.shift();$('#sm-left').textContent='נשארו '+(smDeck.length+1);showCard($('#sm-card'),$('#sm-opts'),smCur,(ok,sure)=>{if(!smOn)return;if(ok)addPts(1);else{smMiss++;wrong();smDeck.splice(Math.min(3,smDeck.length),0,smCur);if(sure){smDeck.splice(Math.min(7,smDeck.length),0,smCur);toast(SURE_WRONG)}}smNext()},true)}
 $('#sm-start').addEventListener('click',()=>{smOn=true;smMiss=0;smDeck=shuffle(FC);$('#sm-start').disabled=true;smNext()});
 
 /* ═══════ timeline + terms generator ═══════ */
@@ -1164,7 +1231,7 @@ function speak(text,btn){if(!TTS.ok){toast('הדפדפן הזה לא תומך ב
   const u=new SpeechSynthesisUtterance(text.replace(/🔊/g,'').replace(/\s+/g,' ').trim());u.lang='he-IL';if(TTS.voice)u.voice=TTS.voice;u.rate=0.95;
   u.onend=u.onerror=()=>{btn.classList.remove('on');if(TTS.cur===btn)TTS.cur=null};TTS.cur=btn;btn.classList.add('on');speechSynthesis.speak(u);
   if(!TTS.voice&&!TTS.warned){TTS.warned=true;toast('לא נמצא קול עברי במכשיר. בהגדרות: נגישות ← תוכן מדובר ← קולות ← עברית')}}
-const SPK_SEL='.lead,.def,.world,.quote,.q,.explain .txt,.card:not(.sorter):not(:has(#builder)):not(:has(#eumap)):not(:has(#sp-card)),.fc,#allynote,#front-note,.prob';
+const SPK_SEL='.lead,.def,.world,.quote,.q,.explain .txt,.oq-q,.oq-model div,.links .node,.card:not(.sorter):not(.openq):not(.game):not(.warm):not(:has(#builder)):not(:has(#eumap)):not(:has(#sp-card)),.fc,#allynote,#front-note,.prob';
 function speakify(root){$$(SPK_SEL,root).concat(root&&root.matches&&root.matches(SPK_SEL)?[root]:[]).forEach(el=>{if(el.querySelector(':scope > .spk'))return;const b=document.createElement('button');b.type='button';b.className='spk';b.title='הקראה';b.setAttribute('aria-label','הקראה');b.textContent='🔊';b.addEventListener('click',e=>{e.stopPropagation();speak(el.innerText,b)});el.prepend(b)})}
 speakify(document);
 new MutationObserver(ms=>{ms.forEach(m=>m.addedNodes.forEach(n=>{if(n.nodeType!==1)return;speakify(n);const p=n.parentElement&&n.parentElement.closest(SPK_SEL);if(p)speakify(p)}))}).observe($('main'),{childList:true,subtree:true});
@@ -1181,7 +1248,7 @@ var DAYOF={};DAYS.forEach((d,i)=>d.st.forEach(s=>DAYOF[s]=i+1));
 function renderPlan(){const el=$('#plan');if(!el||!DAYS)return;const now=new Date();const iso=now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0')+'-'+String(now.getDate()).padStart(2,'0');const lastQuiz=store.get('lastQuiz',null);
   el.innerHTML='<h3>🗓️ המסלול עד המבחן</h3>'+DAYS.map((d,i)=>{const done=d.st.filter(s=>G.boss[s]).length;let st='';
     if(d.st.length)st=done+'/'+d.st.length+' בוסים'+(done===d.st.length?' ✔':'');
-    if(i===2)st+=(lastQuiz!=null?' · מבחן '+lastQuiz+'/15':'');if(i===3)st=G.sprint.runs?G.sprint.runs+' ספרינטים · שיא '+G.sprint.best:'';
+    if(i===2)st+=(lastQuiz!=null?' · מבחן '+lastQuiz+'/15':'');if(i===3)st=G.sprint.runs?G.sprint.runs+' ספרינטים · שיא '+G.sprint.best:'';if(G.warm&&G.warm[d.iso])st+=(st?' · ':'')+'☀️ חימום ✔';
     const what=(d.st.length?'תחנות '+d.st.map(s=>STATIONS.indexOf(s)+1).join(', ')+': '+d.st.map(s=>STNAMES[s]).join(', '):'')+(d.extra?(d.st.length?' + ':'')+d.extra:'');
     return `<div class="prow${d.iso===iso?' now':''}"><b>${d.d} · ${d.date}</b><span>${what}</span><span class="pst">${st}</span></div>`}).join('')+'<p style="margin-top:8px;font-size:14px;color:var(--muted)">כ-40 דקות ביום. אם יום אחד התפספס, פשוט ממשיכים מהתחנה הבאה שפתוחה.</p>'}
 STATIONS.forEach(k=>{const h=$(`section[data-st="${k}"] .st-head .num`);if(h&&DAYOF[k])h.insertAdjacentHTML('afterend',`<span class="tag chem daytag">יום ${DAYOF[k]}</span>`)});
@@ -1194,12 +1261,151 @@ function buildSteps(sec){const key=sec.dataset.st,body=sec.querySelector('.st-bo
   [...body.children].forEach(el=>{if(el.matches('.sp')){el.remove();return}const lastIsHead=cur&&cur.length&&cur[cur.length-1].matches('.minih');const brk=el.matches('.minih,.boss')||(el.matches('.two,.demo,.types,.card')&&!lastIsHead);if(!cur||(brk&&cur.length)){cur=[];groups.push(cur)}cur.push(el)});
   const n=groups.length;let opened=Math.min(STEPS[key]||0,n);
   const wraps=groups.map((g,i)=>{const w=document.createElement('div');w.className='step';w.dataset.i=i+1;const hd=document.createElement('button');hd.type='button';hd.className='stephead';hd.innerHTML=`<span class="n">שלב ${i+1}/${n}</span><span>${stepTitle(g)}</span><span class="arr">▶</span>`;const bd=document.createElement('div');bd.className='stepbody';g.forEach(el=>bd.appendChild(el));w.appendChild(hd);w.appendChild(bd);body.appendChild(w);
-    hd.addEventListener('click',()=>{const i1=i+1;if(i1>opened){opened=i1;STEPS[key]=opened;store.set('steps',STEPS);w.classList.add('open');if(i1===1)addPts(2,'התחלתם תחנה');paint();setTimeout(()=>w.scrollIntoView({behavior:'smooth',block:'start'}),60)}else w.classList.toggle('open')});return w});
+    hd.addEventListener('click',()=>{const i1=i+1;if(i1>opened){opened=i1;STEPS[key]=opened;store.set('steps',STEPS);w.classList.add('open');if(i1===1){addPts(2,'התחלתם תחנה');warmNudge()}paint();setTimeout(()=>w.scrollIntoView({behavior:'smooth',block:'start'}),60)}else w.classList.toggle('open')});return w});
   function paint(){wraps.forEach((w,i)=>{const i1=i+1;w.hidden=i1>opened+1;w.classList.toggle('done',i1<=opened&&i1<opened);});
     wraps.forEach((w,i)=>{const i1=i+1;if(i1<=opened&&!w.dataset.init){w.dataset.init=1;w.classList.toggle('open',i1===opened)}});
     const hint=body.querySelector('.stepnext');if(hint)hint.remove();if(opened<n){const p=document.createElement('p');p.className='stepnext';p.textContent=opened?'סיימתם? לחצו על השלב הבא כשאתם מוכנים.':'לחצו על שלב 1 כדי להתחיל. השלבים הבאים יופיעו אחד-אחד.';body.appendChild(p)}}
   paint()}
 STATIONS.forEach(k=>buildSteps($(`section[data-st="${k}"]`)));
+
+/* ═══════ v5: spoken open questions · daily warm-up · confidence rating · "what's new" table · cause→effect + what-if ═══════ */
+BADGES.push({k:'orator',i:'🎤',n:'כמו במבחן',d:'5 שאלות פתוחות בקול עברו'},{k:'warm',i:'☀️',n:'חימום',d:'2 חימומים יומיים הושלמו'},{k:'newwar',i:'🆕',n:'מה חדש',d:'טבלת "מה חדש במלחמה" הושלמה'},{k:'why',i:'🔗',n:'סיבה ותוצאה',d:'כל הקישורים ו"מה אם" נכונים'});
+G.open=store.get('open',{});G.warm=store.get('warm',{});G.conf=store.get('conf',{sure:0,sureWrong:0,unsure:0,unsureRight:0});G.newwar=store.get('newwar',0);G.why=store.get('why',0);
+const norm=s=>(s||'').replace(/[״"'׳.,:;!?()\-–]/g,' ').replace(/\s+/g,' ').trim();
+const esc=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+function fy(a,rnd){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor((rnd||Math.random)()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+
+/* ── confidence: a question must be rated "sure / not sure" before an answer counts ── */
+const SURE_WRONG='⚠️ טעות בביטחון מלא: זו תפיסה שגויה, לא חוסר ידע. חזרו להסבר.';
+function confRow(){const d=document.createElement('div');d.className='conf';d.innerHTML='<span>כמה בטוחים?</span><button type="button" data-c="1">😎 בטוח</button><button type="button" data-c="0">🤔 לא בטוח</button>';d.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{d.querySelectorAll('button').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');d.dataset.c=b.dataset.c}));return d}
+function confOf(row){return row&&row.dataset.c!=null?row.dataset.c==='1':null}
+function needConf(row){if(!row||confOf(row)!=null)return false;toast('קודם סמנו: בטוח או לא בטוח?');row.classList.add('nudge');setTimeout(()=>row.classList.remove('nudge'),700);return true}
+function confLog(sure,ok){if(sure==null)return;if(sure){G.conf.sure++;if(!ok)G.conf.sureWrong++}else{G.conf.unsure++;if(ok)G.conf.unsureRight++}store.set('conf',G.conf)}
+
+/* ── 1. open questions, answered out loud (Web Speech API) and self-checked against the must-have points ── */
+const OPEN={
+ blocs:{q:'הסבירו כיצד מערכת הבריתות הייתה גורם לפרוץ מלחמת העולם הראשונה. ציינו את שני הגושים.',
+  pts:[{t:'אחרי איחוד גרמניה (1871) מאזן הכוחות התערער',k:['1871','איחוד גרמניה','מאזן']},{t:'שני גושים: הברית המשולשת (גרמניה, אוסטרו-הונגריה, איטליה) מול ההסכמה המשולשת (בריטניה, צרפת, רוסיה)',k:['גוש','משולשת','הסכמה']},{t:'הבריתות נועדו לתת ביטחון, אבל הפכו כל סכסוך מקומי לסכנה של מלחמה כללית',k:['סכסוך','מקומי','כללית','ביטחון','גרר','נגרר']}],
+  model:'אחרי איחוד גרמניה ב-1871 התערער מאזן הכוחות באירופה, והמדינות חתמו בריתות שחילקו אותה לשני גושים יריבים: הברית המשולשת (גרמניה, אוסטרו-הונגריה, איטליה) מול ההסכמה המשולשת (בריטניה, צרפת, רוסיה). הבריתות נועדו למנוע מלחמה ולתת ביטחון, אבל בפועל הפכו כל סכסוך מקומי לסכנה של מלחמה כללית, כי כל מדינה הייתה מחויבת לעזור לבעלות בריתה.'},
+ national:{q:'הסבירו מדוע הבלקן כונה "חבית אבק השרפה של אירופה", ותנו דוגמה לאירוע שהגביר שם את המתיחות.',
+  pts:[{t:'האימפריה העות׳מאנית נחלשה והתפוררה, ועמי הבלקן נאבקו לעצמאות',k:['עות','עצמאות','נחלש','התפורר']},{t:'רוסיה ואוסטרו-הונגריה התחרו על השליטה באזור',k:['רוסיה','אוסטר','התחר','שליטה']},{t:'דוגמה: 1908, סיפוח בוסניה והרצגובינה; סרביה זעמה ורוסיה תמכה בה (או: מלחמות הבלקן 1912–1913)',k:['1908','בוסניה','סרביה','1912','מלחמות הבלקן','סיפוח','סיפח']}],
+  model:'הבלקן כונה "חבית אבק השרפה" כי האימפריה העות׳מאנית נחלשה והתפוררה, ועמים רבים (סרבים, בולגרים, יוונים) נאבקו לעצמאות, בעוד שתי קיסרויות שכנות, רוסיה ואוסטרו-הונגריה, התחרו על השליטה באזור. כל סכסוך קטן יכול היה להתפוצץ. דוגמה: ב-1908 סיפחה אוסטרו-הונגריה את בוסניה והרצגובינה, סרביה זעמה ואיימה במלחמה, ורוסיה תמכה בסרביה.'},
+ arms:{q:'הסבירו שניים מהגורמים לפרוץ המלחמה: המרוץ האימפריאליסטי ומרוץ החימוש. לכל גורם: הסבר קצר ודוגמה.',
+  pts:[{t:'אימפריאליזם: תחרות בין המעצמות על שטחים ומושבות באסיה ובאפריקה',k:['מושב','שטחים','אפריקה','אסיה','אימפריאל']},{t:'דוגמה: משבר מרוקו (1905, 1911), גרמניה נגד צרפת, בריטניה תמכה בצרפת',k:['מרוקו','אגדיר']},{t:'מרוץ חימוש: הגדלת תקציבי ביטחון, הצטיידות בנשק, הארכת השירות הצבאי, בניית צי ותכניות מלחמה',k:['תקציב','שירות','תכניות','נשק','חימוש','צבא']},{t:'דוגמה: הצי הגרמני מול בריטניה; התפיסה שכוח צבאי פותר בעיות מדיניות',k:['צי','אוני','בריטניה','כוח צבאי']}],
+  model:'המרוץ האימפריאליסטי: המעצמות התחרו על שטחים ומושבות באסיה ובאפריקה, וגם שם נוצרו מוקדי מתיחות. דוגמה: משבר מרוקו (1905, 1911), שבו גרמניה התערבה נגד השליטה הצרפתית, בריטניה תמכה בצרפת והברית ביניהן התהדקה. מרוץ החימוש: המדינות הגדילו תקציבי ביטחון, הצטיידו בנשק, האריכו את השירות הצבאי, בנו צי (גרמניה מול בריטניה) והכינו תכניות מלחמה, מתוך תפיסה שכוח צבאי הוא אמצעי יעיל לפתרון בעיות מדיניות.'},
+ spark:{q:'הסבירו כיצד הרצח בסרייבו הפך למלחמת עולם. הבחינו בין גורמי העומק לגורם המיידי.',
+  pts:[{t:'28 ביוני 1914: גברילו פרינציפ רצח את פרנץ פרדיננד, יורש העצר, בסרייבו',k:['פרינציפ','פרדיננד','יוני','סרייבו','יורש']},{t:'אוסטרו-הונגריה האשימה את סרביה, הציבה אולטימטום, וב-28 ביולי הכריזה מלחמה למרות שסרביה קיבלה את רוב הדרישות',k:['אולטימטום','הכריז','יולי','דריש']},{t:'מערכת הבריתות גררה את כל המעצמות (רוסיה, גרמניה, צרפת, בריטניה) תוך חודש',k:['בריתות','גרר','חודש','מעצמות','רוסיה']},{t:'הרצח הוא הגורם המיידי (הניצוץ); הבריתות, הלאומיות, האימפריאליזם והחימוש הם גורמי העומק',k:['מיידי','ניצוץ','עומק','עילה']}],
+  model:'ב-28 ביוני 1914 רצח גברילו פרינציפ, סרבי בוסני לאומן, את פרנץ פרדיננד, יורש העצר האוסטרו-הונגרי, בסרייבו. אוסטרו-הונגריה האשימה את סרביה והציבה לה אולטימטום; סרביה קיבלה את רוב הדרישות, ובכל זאת ב-28 ביולי הכריזה אוסטרו-הונגריה מלחמה. אז נכנסה לפעולה מערכת הבריתות: רוסיה לצד סרביה, גרמניה לצד אוסטרו-הונגריה, צרפת ובריטניה לצד רוסיה, ותוך חודש כל המעצמות היו במלחמה. הרצח היה רק הגורם המיידי (הניצוץ); גורמי העומק, הבריתות, המאבקים הלאומיים, האימפריאליזם ומרוץ החימוש, נבנו במשך עשרות שנים.'},
+ fronts:{q:'תארו את אופי הלחימה בחזית המערבית, והסבירו מדוע רוסיה פרשה מהמלחמה.',
+  pts:[{t:'הגרמנים נבלמו על נהר המרן, כ-40 ק״מ מפריז',k:['מרן','פריז','נבלמ','בלימה']},{t:'מלחמת חפירות: מלחמה נייחת, התשה ומגננה לאורך כ-700 ק״מ, עם קרבנות רבים',k:['חפירות','נייח','התשה','מגננה']},{t:'ברוסיה: אובדן שטחים, מחסור במזון וחוסר אמון בשלטון הובילו למהפכה (פברואר 1917, הצאר מודח) ולמהפכה נוספת באוקטובר',k:['מהפכה','צאר','1917','מחסור','אמון']},{t:'3 במרס 1918: הסכם ברסט-ליטובסק, רוסיה פורשת מהמלחמה',k:['ברסט','ליטובסק','1918','הסכם']}],
+  model:'בחזית המערבית נבלמו הגרמנים על נהר המרן, כ-40 ק״מ מפריז, ומאז התנהלה מלחמה נייחת: שני הצבאות התחפרו לאורך כ-700 ק״מ, וכל ניסיון להתקדם נתקל באש. זו הייתה מלחמת התשה ומלחמת מגננה שתבעה קרבנות רבים. בחזית המזרחית רוסיה איבדה שטחים רבים, סבלה ממחסור במזון וממיליוני הרוגים, והאמון בשלטון נשבר. בפברואר 1917 פרצה מהפכה והצאר ניקולאי השני הודח, באוקטובר פרצה מהפכה נוספת, וב-3 במרס 1918 חתמה רוסיה על הסכם ברסט-ליטובסק ופרשה מהמלחמה.'},
+ usa:{q:'הציגו שלושה גורמים לכניסת ארצות הברית למלחמה באפריל 1917.',
+  pts:[{t:'מלחמת הצוללות: הטבעת הלוזיטניה (1915, 128 אמריקנים) וחידוש מלחמת הצוללות הבלתי מוגבלת ב-1917',k:['צוללות','צוללת','לוזיטניה']},{t:'מניע כלכלי: פגיעה בסחר, והלוואות גדולות לבריטניה שארה״ב רצתה להבטיח',k:['כלכל','הלווא','סחר','כסף','השקיע']},{t:'המהפכה ברוסיה (פברואר 1917): בלי הצאר קל להצטרף לצד "הדמוקרטי"',k:['מהפכה','צאר','רוסיה']},{t:'אידאולוגיה: וילסון, "לעשות את העולם מקום בטוח למען הדמוקרטיה"',k:['וילסון','דמוקרטי','אידאולוג','בטוח']}],
+  model:'ארבעה גורמים: (1) מלחמת הצוללות הגרמנית, ובראשה הטבעת אוניית הנוסעים לוזיטניה במאי 1915 (כ-1,200 נספים, בהם 128 אמריקנים), וחידוש מלחמת הצוללות הבלתי מוגבלת ב-1917. (2) מניע כלכלי: הצוללות פגעו בסחר, וארה״ב הלוותה כספים רבים לבריטניה ורצתה להבטיח שיוחזרו. (3) המהפכה ברוסיה בפברואר 1917: בלי הצאר אפשר היה להציג את המלחמה כמלחמת דמוקרטיות נגד משטרים מלוכניים. (4) אידאולוגיה: הנשיא וילסון, "אנו נלחמים כדי לעשות את העולם מקום בטוח למען הדמוקרטיה".'},
+ total:{q:'מהי מלחמה טוטלית? הסבירו והביאו שלוש דוגמאות מהספר לכך שחזית ועורף מיטשטשים.',
+  pts:[{t:'הגדרה: מלחמה הקשורה לכל תחומי החיים; המדינה מגייסת את מרבית משאביה',k:['תחומי החיים','משאב','מגייס','כל תחום','כל החיים']},{t:'לפי הרכבי: הגיוס הלאומי העממי והמהפכה התעשייתית',k:['הרכבי','גיוס','תעשייתית']},{t:'דוגמאות: כלכלת מלחמה, קצבות מזון ושוק שחור, נשים בתעשייה ובחקלאות, תעמולה, העורף הופך ליעד',k:['כלכל','קצב','שוק שחור','נשים','תעמול','יעד']},{t:'ההבדל בין חייל לאזרח ובין חזית לעורף מיטשטש',k:['מיטשטש','טשטש','אזרח','חייל','חזית ועורף']}],
+  model:'מלחמה טוטלית היא מלחמה הקשורה לכל תחומי החיים: המדינה מגייסת את מרבית משאביה, כוח אדם, חקלאות ותעשייה, וההבדל בין חזית לעורף מיטשטש. לפי הרכבי אפשרו אותה שני גורמים: הגיוס הלאומי העממי והמהפכה התעשייתית. דוגמאות: כלכלת מלחמה שכולה מגויסת לייצור נשק; קצבות מזון ושוק שחור (המחסור בגרמניה בחורף 1916–1917); נשים שנכנסו לתעשייה הכבדה, לחקלאות, לפקידות ולתחבורה; מלחמת תעמולה; והעורף עצמו שהופך ליעד לפגיעה.'}
+};
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition||null;
+function openPassed(){return STATIONS.filter(k=>G.open[k]&&G.open[k].passed).length}
+function renderOpen(key){const card=$(`.openq[data-open="${key}"] .oq-body`);if(!card)return;const o=OPEN[key],saved=G.open[key];
+  card.innerHTML=`<p class="oq-q">${o.q}</p><p class="oq-tip">אמרו את התשובה <b>בקול</b>, 2–3 משפטים, כאילו אתם כותבים במבחן. ${SR?'הטלפון מתמלל, ואז בודקים מול נקודות החובה.':'הדפדפן הזה לא מתמלל דיבור: אמרו בקול להורה או לעצמכם, ואז לחצו "אמרתי".'}</p><div class="oq-live" id="oql-${key}">${saved&&saved.txt?esc(saved.txt):'<span class="interim">כאן יופיע מה שאמרתם…</span>'}</div><div class="ctrls"><button class="btn mic" id="oqm-${key}">${SR?(saved?'🎤 עוד ניסיון':'🎤 התחילו לדבר'):'🗣️ אמרתי, לבדיקה'}</button>${SR?`<button class="btn ghost" id="oqs-${key}">🗣️ בלי מיקרופון: אמרתי</button>`:''}</div><div class="feedback${saved&&saved.passed?' good':''}" id="oqf-${key}">${saved?(saved.passed?'✔ עברתם: ':'')+saved.c+'/'+saved.n+' נקודות חובה בפעם האחרונה':''}</div><div id="oqr-${key}"></div>`;
+  const live=$('#oql-'+key),mic=$('#oqm-'+key),fb=$('#oqf-'+key);let rec=null,listening=false,finalTxt='',startAt=0;
+  function paint(interim){live.innerHTML=(finalTxt?esc(finalTxt):'')+(interim?'<span class="interim"> '+esc(interim)+'</span>':'')||'<span class="interim">מקשיבים… דברו</span>'}
+  function stopRec(){listening=false;if(rec){try{rec.onend=null;rec.stop()}catch(e){}}mic.textContent='🎤 עוד ניסיון';mic.classList.remove('on');live.classList.remove('on');
+    if(norm(finalTxt).length<8){fb.textContent='לא נקלט כמעט כלום. נסו שוב קרוב למיקרופון, או לחצו "בלי מיקרופון: אמרתי".';fb.className='feedback bad';return}fb.textContent='';showRubric(finalTxt)}
+  function startRec(){if(window.speechSynthesis)speechSynthesis.cancel();finalTxt='';rec=new SR();rec.lang='he-IL';rec.continuous=true;rec.interimResults=true;rec.maxAlternatives=1;listening=true;startAt=Date.now();mic.textContent='⏹ סיימתי';mic.classList.add('on');live.classList.add('on');$('#oqr-'+key).innerHTML='';fb.textContent='';fb.className='feedback';paint('');
+    rec.onresult=e=>{let interim='';for(let i=e.resultIndex;i<e.results.length;i++){const t=e.results[i][0].transcript;if(e.results[i].isFinal)finalTxt+=t+' ';else interim+=t}paint(interim)};
+    rec.onerror=e=>{if(e.error==='not-allowed'||e.error==='service-not-allowed'||e.error==='audio-capture'){listening=false;fb.textContent='אין גישה למיקרופון. אפשרו מיקרופון לאתר בהגדרות הדפדפן, או לחצו "בלי מיקרופון: אמרתי".';fb.className='feedback bad';mic.textContent='🎤 נסו שוב';mic.classList.remove('on');live.classList.remove('on')}};
+    rec.onend=()=>{if(listening&&Date.now()-startAt<120000){try{rec.start()}catch(e){}}else if(listening)stopRec()};
+    try{rec.start()}catch(e){listening=false;fb.textContent='המיקרופון לא נפתח. לחצו "בלי מיקרופון: אמרתי".';fb.className='feedback bad'}}
+  mic.addEventListener('click',()=>{if(!SR){showRubric('');return}listening?stopRec():startRec()});
+  const nomic=$('#oqs-'+key);if(nomic)nomic.addEventListener('click',()=>{if(listening){listening=false;try{rec.onend=null;rec.stop()}catch(e){}mic.textContent='🎤 עוד ניסיון';mic.classList.remove('on');live.classList.remove('on')}showRubric(finalTxt)});
+  function showRubric(txt){const n=norm(txt),r=$('#oqr-'+key);let auto=0;
+    r.innerHTML=`<div class="minih" style="margin-top:12px">נקודות החובה בתשובה. סמנו מה אמרתם${n?' (מה שזוהה בתמלול כבר מסומן)':''}:</div><div class="rubric">${o.pts.map((p,i)=>{const hit=!!n&&p.k.some(w=>n.includes(norm(w)));if(hit)auto++;return `<label class="${hit?'auto':''}"><input type="checkbox" data-i="${i}" ${hit?'checked':''}><span>${p.t}${hit?' <em>זוהה בתמלול</em>':''}</span></label>`}).join('')}</div><div class="ctrls"><button class="btn" id="oqg-${key}">חשבו ציון</button></div><div class="feedback" id="oqgf-${key}"></div><details class="oq-model"><summary>תשובת מודל (פתחו אחרי שסימנתם)</summary><div>${o.model}</div></details>`;
+    $('#oqg-'+key).addEventListener('click',()=>{const c=r.querySelectorAll('input:checked').length,N=o.pts.length,need=Math.ceil(N*2/3),pass=c>=need,prev=G.open[key],first=!(prev&&prev.passed);
+      G.open[key]={n:N,c,txt:(txt||'').trim().slice(0,400),at:Date.now(),passed:!!(prev&&prev.passed)||pass};store.set('open',G.open);
+      const g=$('#oqgf-'+key);$('#oqg-'+key).disabled=true;r.querySelectorAll('input').forEach(i=>i.disabled=true);r.querySelector('.oq-model').open=true;
+      if(pass){g.className='feedback good';g.textContent=`✔ ${c}/${N} נקודות חובה. ${c===N?'תשובה מלאה, ככה כותבים במבחן.':'קראו בתשובת המודל מה היה חסר, ואמרו את זה בקול פעם אחת.'}`;fb.className='feedback good';fb.textContent='✔ עברתם: '+c+'/'+N;if(first){addPts(c*5,'שאלה פתוחה בקול');if(openPassed()>=5)award('orator');confetti()}}
+      else{const miss=o.pts.filter((p,i)=>!r.querySelector(`input[data-i="${i}"]`).checked).map(p=>p.t);g.className='feedback bad';g.innerHTML=`${c}/${N}. צריך לפחות ${need}. חסר: <b>${miss.join(' · ')}</b>. קראו את תשובת המודל, ואז "עוד ניסיון" ואמרו הכול מחדש.`;fb.textContent=c+'/'+N+' נקודות חובה'}})}}
+STATIONS.forEach(renderOpen);
+
+/* ── 2. daily warm-up: 5 questions from the previous days' stations, before a new station is opened ── */
+function todayISO(){const n=new Date();return n.getFullYear()+'-'+String(n.getMonth()+1).padStart(2,'0')+'-'+String(n.getDate()).padStart(2,'0')}
+function seedRand(s){let h=1779033703^s.length;for(let i=0;i<s.length;i++){h=Math.imul(h^s.charCodeAt(i),3432918353);h=h<<13|h>>>19}return function(){h=Math.imul(h^h>>>16,2246822507);h=Math.imul(h^h>>>13,3266489909);return ((h^=h>>>16)>>>0)/4294967296}}
+const WARM={pending:false};
+function warmNudge(){if(WARM.pending)setTimeout(()=>toast('☀️ טיפ: קודם החימום של היום, למעלה ליד המסלול'),1500)}
+function renderWarm(){const el=$('#warm');if(!el)return;const iso=todayISO();let di=DAYS.findIndex(d=>d.iso===iso);if(di<0)di=iso<DAYS[0].iso?0:DAYS.length;
+  const prev=DAYS.slice(0,di).flatMap(d=>d.st),learned=prev.filter(k=>G.boss[k]||(STEPS[k]||0)>0);el.hidden=false;WARM.pending=false;
+  if(!prev.length){el.innerHTML='<h3>☀️ חימום יומי</h3><p class="oq-tip">מחר, לפני שפותחים תחנה חדשה: 5 שאלות קצרות ממה שלמדתם היום. ככה מה שנלמד לא נעלם בלילה.</p>';return}
+  if(!learned.length){el.innerHTML=`<h3>☀️ חימום יומי</h3><p class="oq-tip">החימום נבנה ממה שכבר למדתם, ותחנות ${prev.map(k=>STATIONS.indexOf(k)+1).join(', ')} עוד לא נפתחו. התחילו מהן, והחימום יופיע מחר.</p>`;return}
+  const done=G.warm[iso];WARM.pending=!done;const pool=[];
+  learned.forEach(k=>{BOSS[k].q.forEach(q=>pool.push({t:k,q:q.q,o:q.o,a:q.a,w:''}));QUIZ.forEach(q=>{if(q.t===k)pool.push({t:k,q:q.q,o:q.o,a:q.a,w:q.w})})});
+  const deck=fy(pool,seedRand(iso+'|'+learned.join())).slice(0,5);
+  el.innerHTML=`<h3>☀️ חימום של היום: ${deck.length} שאלות מהימים הקודמים</h3><p class="oq-tip">לפני שפותחים תחנה חדשה. טעות מחזירה את השאלה לסוף התור (בלי לגלות את התשובה), ומסיימים כשכולן נכונות.</p>${done?`<p class="feedback good">✔ החימום של היום הושלם${done.miss?' ('+done.miss+' טעויות חזרו לתור)':', בלי טעויות'}. אפשר עוד סיבוב, בלי נקודות.</p>`:''}<div id="warm-q"></div><div class="statline"><span>נשארו: <b id="warm-left">${deck.length}</b></span><span>מהתחנות: ${learned.map(k=>STNAMES[k]).join(', ')}</span></div>`;
+  let q=deck.slice(),miss=0;const box=$('#warm-q');
+  function next(){if(!q.length){box.innerHTML=`<div class="wdone">🔥 החימום הושלם${miss?' עם '+miss+' טעויות שחזרו':' בלי אף טעות'}. עכשיו לתחנה של היום.</div>`;if(!G.warm[iso]){G.warm[iso]={miss,at:Date.now()};store.set('warm',G.warm);WARM.pending=false;addPts(15,'חימום יומי הושלם');if(Object.keys(G.warm).length>=2)award('warm');renderPlan()}return}
+    const it=q[0],d=document.createElement('div');d.className='q';d.innerHTML=`<div class="qt">${it.q}</div><div class="opts"></div><div class="why"></div>`;const opts=d.querySelector('.opts'),cr=confRow();opts.before(cr);
+    fy(it.o.map((_,j)=>j)).forEach(j=>{const b=document.createElement('button');b.type='button';b.className='opt';b.textContent=it.o[j];b.addEventListener('click',()=>{if(d.dataset.locked||needConf(cr))return;d.dataset.locked=1;const ok=j===it.a,sure=confOf(cr);confLog(sure,ok);cr.remove();d.querySelectorAll('.opt').forEach(x=>x.disabled=true);b.classList.add(ok?'right':'wrong');
+      if(ok){q.shift();if(!done)correct('חימום');d.querySelector('.why').textContent='נכון! '+it.w}else{miss++;wrong();q.push(q.shift());G.wrongTopics[it.t]=(G.wrongTopics[it.t]||0)+(sure?2:1);store.set('wrongTopics',G.wrongTopics);d.querySelector('.why').textContent='לא נכון. השאלה תחזור בהמשך, עם אפשרויות מעורבבות.'+(sure?' '+SURE_WRONG:'')}
+      $('#warm-left').textContent=q.length;setTimeout(next,ok?700:1900)});opts.appendChild(b)});box.innerHTML='';box.appendChild(d)}
+  next()}
+renderWarm();
+
+/* ── 4. "what was new in this war": fill the comparison table ── */
+const NEWWAR=[
+ {a:'מי נלחם',before:'צבאות מקצועיים; המלחמה היא "מאורע צבאי" בלבד',now:'גיוס לאומי עממי: המוני אזרחים הופכים לחיילים (הרכבי)'},
+ {a:'מאיפה מגיע הנשק',before:'כמויות קטנות, ייצור איטי',now:'המהפכה התעשייתית: ייצור המוני של נשק ותחמושת בעורף'},
+ {a:'העורף',before:'רחוק מהמלחמה, החיים נמשכים כרגיל',now:'כלכלת מלחמה, קצבות מזון ושוק שחור; העורף הופך ליעד לפגיעה'},
+ {a:'נשים',before:'מחוץ למאמץ המלחמתי',now:'בתעשייה הכבדה, בחקלאות, בפקידות, בתחבורה ובחיל עזר'},
+ {a:'כלי הנשק',before:'פרשים, רובים ותותחים',now:'מקלעים, טנקים (1917), מטוסים, צוללות וגז'},
+ {a:'אופי הלחימה',before:'קרבות קצרים והכרעה בשדה הקרב',now:'מלחמת חפירות: נייחת, התשה ומגננה, ארבע שנים'},
+ {a:'דעת הקהל',before:'עניין של מלכים וגנרלים',now:'מלחמת תעמולה: כרזות, עיתונים, כרוזים ממטוסים'}
+];
+function renderNewwar(){const root=$('#newwar-game');if(!root)return;const chips=fy(NEWWAR.flatMap((r,i)=>[{r:i,c:'before',t:r.before},{r:i,c:'now',t:r.now}]));let sel=null,placed=0,miss=0;const done=G.newwar;
+  root.innerHTML=`<p class="oq-tip">לחצו על משפט, ואז על התא המתאים: איזו שורה, ו"לפני" או "במלחמה הזו". ${done?'<b style="color:var(--good)">✔ הושלם. עוד סיבוב, בלי נקודות.</b>':''}</p><div class="pool cmp-pool" id="nw-pool"></div><div class="cmp"><div class="row head"><h5></h5><div class="cells"><div class="hd before">לפני</div><div class="hd now">מלחה״ע הראשונה</div></div></div>${NEWWAR.map((r,i)=>`<div class="row"><h5>${r.a}</h5><div class="cells"><button type="button" class="cell before" data-r="${i}" data-c="before" aria-label="${r.a}, לפני"></button><button type="button" class="cell now" data-r="${i}" data-c="now" aria-label="${r.a}, במלחמה"></button></div></div>`).join('')}</div><div class="feedback" id="nw-fb"></div><p class="oq-tip" style="margin-top:8px">במבחן כותבים את העמודה הימנית. העמודה "לפני" היא רק ניגוד להמחשה.</p>`;
+  const pool=$('#nw-pool'),fb=$('#nw-fb');chips.forEach(ch=>{const b=document.createElement('button');b.type='button';b.className='chip';b.textContent=ch.t;b._d=ch;b.addEventListener('click',()=>{$$('#nw-pool .chip').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');sel=b;fb.textContent='עכשיו לחצו על התא המתאים';fb.className='feedback'});pool.appendChild(b)});
+  root.querySelectorAll('.cell').forEach(cell=>cell.addEventListener('click',()=>{if(cell.classList.contains('filled'))return;if(!sel){fb.textContent='קודם בוחרים משפט מהמאגר';fb.className='feedback';return}const d=sel._d,ok=+cell.dataset.r===d.r&&cell.dataset.c===d.c;
+    if(ok){cell.textContent=d.t;cell.classList.add('filled');sel.remove();sel=null;placed++;fb.textContent='נכון ✔';fb.className='feedback good';if(!done)addPts(3,'תא נכון');
+      if(placed===chips.length){fb.innerHTML=`🏁 הטבלה מלאה${miss?' ('+miss+' טעויות בדרך)':', בלי טעויות'}. זו תשובה שלמה לשאלה "מה היה ייחודי במלחמה הזו".`;if(!G.newwar){G.newwar=1;store.set('newwar',1);addPts(20,'הטבלה הושלמה');award('newwar');confetti()}}}
+    else{miss++;wrong();cell.classList.add('shake');sel.classList.add('err');setTimeout(()=>{cell.classList.remove('shake');if(sel)sel.classList.remove('err')},600);const row=NEWWAR[d.r];fb.textContent=(+cell.dataset.r!==d.r?'לא השורה הזו. ':'השורה נכונה, אבל ')+(cell.dataset.c===d.c?'':'חשבו: זה "לפני" או "במלחמה הזו"?');fb.className='feedback bad'}}))}
+renderNewwar();
+
+/* ── 5. cause → effect: why did each step lead to the next, and "what if" ── */
+const WHY={nodes:['28 ביוני 1914: רצח פרנץ פרדיננד בסרייבו','אוסטרו-הונגריה מאשימה את סרביה, אולטימטום, וב-28 ביולי מכריזה מלחמה','רוסיה מתגייסת להגן על סרביה','גרמניה מכריזה מלחמה על רוסיה','צרפת נכנסת למלחמה לצד רוסיה','גרמניה פולשת לבלגיה ולצרפת; בריטניה מכריזה מלחמה על גרמניה','תוך חודש: כל מעצמות אירופה במלחמה'],
+ links:[
+  {q:'למה אוסטרו-הונגריה האשימה דווקא את סרביה?',o:['הרוצח, גברילו פרינציפ, היה סרבי בוסני לאומן, ואוסטרו-הונגריה דרשה לפרק את הארגונים הלאומיים שפעלו בסרביה','סרביה הכריזה מלחמה ראשונה על אוסטרו-הונגריה','רוסיה ביקשה מאוסטרו-הונגריה להאשים את סרביה']},
+  {q:'למה רוסיה נכנסה לצד סרביה?',o:['רוסיה ראתה בסרבים "אחינו הסלאווים", ותמכה בהם כבר ב-1908 נגד סיפוח בוסניה','רוסיה הייתה חברה בברית המשולשת','רוסיה רצתה לקבל את אלזס-לורן']},
+  {q:'למה גרמניה הכריזה מלחמה על רוסיה?',o:['ברית גרמניה–אוסטרו-הונגריה (1879): אם רוסיה תתקוף את אוסטרו-הונגריה, גרמניה תעזור','גרמניה רצתה לכבוש את בוסניה','רוסיה הטביעה אוניית נוסעים גרמנית']},
+  {q:'למה צרפת נגררה פנימה?',o:['ברית רוסיה–צרפת (1893): צרפת מחויבת לרוסיה, ולכן גרמניה נלחמת בשתי חזיתות','צרפת רצתה להגן על סרביה','בריטניה דרשה מצרפת להילחם']},
+  {q:'למה בריטניה הכריזה מלחמה על גרמניה?',o:['גרמניה פלשה לבלגיה; בריטניה, שהתקרבה לצרפת בהסכמה הלבבית (1904) ובהסכמה המשולשת (1907), יצאה "להגן על אומות קטנות"','בריטניה הייתה חברה בברית המשולשת','הגרמנים כבשו את פריז']}
+ ],
+ whatif:[
+  {q:'מה אם רוסיה לא הייתה מתגייסת להגן על סרביה?',o:['המלחמה הייתה נשארת מקומית, בין אוסטרו-הונגריה לסרביה, וברית 1879 לא הייתה מופעלת נגד רוסיה','בריטניה הייתה תוקפת את גרמניה בכל מקרה','צרפת הייתה פולשת לגרמניה בגלל אלזס-לורן']},
+  {q:'מה אם לא הייתה ברית רוסיה–צרפת (1893)?',o:['גרמניה לא הייתה חוששת ממלחמה בשתי חזיתות, וצרפת לא הייתה נגררת אוטומטית למלחמה של רוסיה','רוסיה הייתה מצטרפת לברית המשולשת','סרביה הייתה מוותרת על בוסניה']},
+  {q:'מה אם הרצח בסרייבו לא היה קורה?',o:['גורמי העומק (בריתות, לאומיות, אימפריאליזם, חימוש) נשארים: "המעצמות רק המתינו לסיבה", וניצוץ אחר היה מצית את המלחמה','לא הייתה פורצת מלחמה באירופה','אוסטרו-הונגריה הייתה מתפרקת מיד']}
+ ]};
+function renderWhy(){const root=$('#why-game');if(!root)return;const done=G.why;let miss=0,step=0;
+  root.innerHTML=`<p class="oq-tip">בין כל שני אירועים יש "למה?". בחרו את הסיבה הנכונה, ואז נפתח הקישור הבא. בסוף: שלוש שאלות "מה אם". ${done?'<b style="color:var(--good)">✔ הושלם. עוד סיבוב, בלי נקודות.</b>':''}</p><div class="links" id="why-links"></div><div id="why-if"></div>`;
+  const L=$('#why-links');
+  function mcq(item,onOk,label){const d=document.createElement('div');d.className='q';d.innerHTML=`<div class="qt">${item.q}</div><div class="opts"></div><div class="why"></div>`;const opts=d.querySelector('.opts');
+    fy(item.o.map((_,j)=>j)).forEach(j=>{const b=document.createElement('button');b.type='button';b.className='opt';b.textContent=item.o[j];b.addEventListener('click',()=>{if(d.dataset.locked)return;const ok=j===0;if(ok){d.dataset.locked=1;d.querySelectorAll('.opt').forEach(x=>x.disabled=true);b.classList.add('right');if(!done)correct(label);setTimeout(()=>onOk(d),500)}else{miss++;wrong();b.classList.add('wrong');b.disabled=true;d.querySelector('.why').textContent='לא נכון. חשבו: איזו ברית או איזה אירוע מחבר בין שני השלבים?'}});opts.appendChild(b)});return d}
+  function node(i){const n=document.createElement('div');n.className='node';n.textContent=WHY.nodes[i];L.appendChild(n)}
+  function link(i){const l=document.createElement('div');l.className='link';l.innerHTML=`<button type="button" class="whybtn">למה? ▾</button>`;L.appendChild(l);
+    l.querySelector('.whybtn').addEventListener('click',()=>{l.querySelector('.whybtn').remove();l.appendChild(mcq(WHY.links[i],d=>{l.classList.add('done');l.innerHTML='<b>כי:</b> '+WHY.links[i].o[0];node(i+1);if(i+1<WHY.links.length)link(i+1);else{node(i+2);whatif()}},'סיבה ← תוצאה'))})}
+  function whatif(){const w=$('#why-if');w.innerHTML='<div class="minih" style="margin-top:14px">ועכשיו הפוך: מה אם?</div><p class="oq-tip">שאלות "מה אם" בודקות אם הבנתם את המנגנון, ולא רק את הסדר. זה בדיוק ההבדל בין "ניצוץ" ל"גורמי עומק".</p><div class="stack" id="why-ifq"></div>';const s=$('#why-ifq');let k=0;
+    function nextIf(){if(k>=WHY.whatif.length){s.insertAdjacentHTML('beforeend',`<div class="wdone">🔗 כל הקישורים ו"מה אם" נכונים${miss?' ('+miss+' טעויות בדרך)':', בלי טעויות'}.</div>`);if(!G.why){G.why=1;store.set('why',1);addPts(25,'סיבה ותוצאה');award('why');confetti()}return}
+      s.appendChild(mcq(WHY.whatif[k],()=>{k++;nextIf()},'מה אם'))}nextIf()}
+  node(0);link(0)}
+renderWhy();
+
+/* ── report: add the new rows + the spoken answers ── */
+const _buildReport=buildReport;
+buildReport=function(){_buildReport();const ans=STATIONS.filter(k=>G.open[k]),ok=openPassed(),c=G.conf;
+  const rows=[['שאלות פתוחות (בקול)',ans.length?ok+' / 7 עברו · ממוצע '+Math.round(ans.reduce((s,k)=>s+G.open[k].c/G.open[k].n,0)/ans.length*100)+'% מנקודות החובה':'עוד לא נענו'],['חימום יומי',Object.keys(G.warm).length?Object.keys(G.warm).length+' ימים הושלמו':'עוד לא'],['ביטחון מול תוצאה',(c.sure+c.unsure)?'"בטוח": '+c.sure+' תשובות, '+c.sureWrong+' טעויות'+(c.sureWrong?' ⚠️ (תפיסות שגויות)':'')+' · "לא בטוח": '+c.unsure+', מהן '+c.unsureRight+' נכונות':'עוד לא דורג'],['מה חדש במלחמה (טבלה)',G.newwar?'הושלם ✔':'לא הושלם'],['סיבה ← תוצאה + "מה אם"',G.why?'הושלם ✔':'לא הושלם']];
+  $('#reportbody').insertAdjacentHTML('beforeend',rows.map(r=>`<div class="row"><b>${r[0]}</b><span>${r[1]}</span></div>`).join('')+ans.map(k=>`<div class="row spoken"><b>🎤 ${STNAMES[k]} (${G.open[k].c}/${G.open[k].n})</b><span>${G.open[k].txt?'"'+esc(G.open[k].txt)+'"':'(בלי תמלול)'}</span></div>`).join(''));
+  const t=$('#reporttext');t.value+='\n'+rows.map(r=>r[0]+': '+r[1]).join('\n')+(ans.length?'\n\nתשובות בקול:\n'+ans.map(k=>STNAMES[k]+' ('+G.open[k].c+'/'+G.open[k].n+'): "'+(G.open[k].txt||'בלי תמלול')+'"').join('\n'):'')};
+renderPlan();
 
 /* ═══════ theme toggle: auto → light → dark ═══════ */
 const THEMES=[['auto','🌓 תצוגה: אוטומטי'],['light','☀️ תצוגה: בהיר'],['dark','🌙 תצוגה: כהה']];
